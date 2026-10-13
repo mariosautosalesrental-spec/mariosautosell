@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Cars\Pages;
 
+use App\Filament\Actions\MarkAsAvailableAction;
+use App\Filament\Actions\MarkAsSoldAction;
 use App\Filament\Resources\Cars\CarResource;
 use App\Services\CarPhotoSync;
 use Filament\Actions\DeleteAction;
@@ -17,7 +19,13 @@ class EditCar extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            MarkAsSoldAction::make(),
+            MarkAsAvailableAction::make(),
+            DeleteAction::make()
+                ->modalDescription(fn (): string => $this->record->isSold()
+                    ? 'This car is sold. Deleting it also removes the sale from the sales numbers on the dashboard, and its photos are deleted.'
+                    : 'The car and its photos are deleted. To keep it, turn off "Show on website" instead.')
+                ->successNotificationTitle('Car deleted'),
         ];
     }
 

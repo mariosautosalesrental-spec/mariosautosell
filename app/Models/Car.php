@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Rules\CanBeActive;
+use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
@@ -187,7 +188,8 @@ class Car extends Model
             return $this;
         }
 
-        $soldAt ??= now();
+        // Always stored in the app timezone: Eloquent writes a date object in its own timezone.
+        $soldAt = CarbonImmutable::instance($soldAt ?? now())->setTimezone(config('app.timezone'));
         $soldPrice ??= $this->price;
 
         $errors = [];

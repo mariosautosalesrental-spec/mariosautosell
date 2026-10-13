@@ -911,7 +911,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 10.1: Lista de carros
 
-- [ ] **Task:** Tabela de carros do admin
+- [x] **Task:** Tabela de carros do admin
   - **Acceptance criteria:**
     - Colunas: foto, nome, versão, milhas, categoria, quantidade de fotos, selos (`Price drop`, `Hidden from site`, `Sold`) e preço
     - Carros ativos, ocultos e vendidos aparecem; eager loading evita consultas por linha
@@ -922,7 +922,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Admin.html` → `.card.panel` (lista de carros)
   - **Traces:** US-3.2
 
-- [ ] **Task:** Busca por nome e filtro por categoria
+- [x] **Task:** Busca por nome e filtro por categoria
   - **Acceptance criteria:**
     - Busca por título e versão; filtro por categoria
     - Combinam entre si
@@ -933,7 +933,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Admin.html` → `#q`, `#catFilter`
   - **Traces:** US-3.2
 
-- [ ] **Task:** Interruptor `On site / Hidden`
+- [x] **Task:** Interruptor `On site / Hidden`
   - **Acceptance criteria:**
     - Alterna `is_active` direto na lista
     - Ativar sem preço, sem foto ou com carro vendido é bloqueado com mensagem explicando o motivo
@@ -944,7 +944,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `toggle_on_sold_car_is_blocked` → pede para reabrir
   - **Traces:** US-3.6
 
-- [ ] **Task:** Editar e excluir na linha
+- [x] **Task:** Editar e excluir na linha
   - **Acceptance criteria:**
     - Editar abre o formulário; excluir pede confirmação
     - Excluir remove o carro, as fotos e os arquivos; a categoria não é afetada
@@ -957,7 +957,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 10.2: Vendas
 
-- [ ] **Task:** Ação `Mark as sold`
+- [x] **Task:** Ação `Mark as sold`
   - **Acceptance criteria:**
     - Disponível na lista e na edição, com confirmação: data da venda (padrão hoje, não pode ser futura) e valor (padrão o preço anunciado, inteiro maior que 0), ambos editáveis
     - Ao confirmar, chama `Car::markAsSold()`: grava `sold_at` e `sold_price` e desativa o carro
@@ -971,7 +971,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `mark_as_sold_twice_does_not_duplicate_sale` → uma venda só
   - **Traces:** US-8.1; Workflow 9
 
-- [ ] **Task:** Ação `Mark as available`
+- [x] **Task:** Ação `Mark as available`
   - **Acceptance criteria:**
     - Aparece só em carros vendidos, com confirmação
     - Apaga `sold_at` e `sold_price`; o carro continua oculto até o admin ligar `Show on website`
@@ -981,7 +981,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `reopen_not_available_for_unsold_car` → ação ausente
   - **Traces:** US-8.2
 
-- [ ] **Task:** Filtro de status e dados da venda na lista
+- [x] **Task:** Filtro de status e dados da venda na lista
   - **Acceptance criteria:**
     - Filtro `All`, `On site`, `Hidden` e `Sold` combinável com busca e categoria
     - Carros vendidos mostram data e valor da venda

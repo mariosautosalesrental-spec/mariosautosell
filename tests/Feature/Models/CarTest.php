@@ -239,6 +239,18 @@ class CarTest extends TestCase
         $this->assertTrue($fresh->sold_at->diffInSeconds(now(), true) < 5);
     }
 
+    public function test_sold_at_keeps_the_same_instant_whatever_timezone_it_is_given_in(): void
+    {
+        $car = Car::factory()->create();
+        $noonInNewYork = CarbonImmutable::parse('2026-10-02 12:00', 'America/New_York');
+
+        $car->markAsSold($noonInNewYork, 9000);
+
+        $stored = $car->fresh()->sold_at;
+        $this->assertSame($noonInNewYork->timestamp, $stored->timestamp);
+        $this->assertSame('2026-10-02 16:00:00', $stored->format('Y-m-d H:i:s')); // UTC in the database
+    }
+
     public function test_mark_as_sold_rejects_future_date(): void
     {
         $car = Car::factory()->create();
