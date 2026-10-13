@@ -59,10 +59,19 @@ class Setting extends Model
 
     /**
      * Reads the row through the cache; used by the scoped binding.
+     *
+     * Only the plain attributes are cached: cache stores that serialize
+     * (database, file, redis) do not give Eloquent models back.
      */
     public static function loadCached(): static
     {
-        return Cache::rememberForever(self::CACHE_KEY, fn () => static::query()->first() ?? static::query()->create(static::defaults()));
+        $attributes = Cache::rememberForever(self::CACHE_KEY, function (): array {
+            $row = static::query()->first() ?? static::query()->create(static::defaults());
+
+            return $row->getAttributes();
+        });
+
+        return (new static)->newFromBuilder($attributes);
     }
 
     public static function flushCache(): void

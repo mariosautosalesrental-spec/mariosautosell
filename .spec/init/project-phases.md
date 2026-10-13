@@ -410,9 +410,9 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 5.1: Home e hero
 
-- [ ] **Task:** Rota `/` e página `home.blade.php`
+- [x] **Task:** Rota `/` e página `home.blade.php`
   - **Acceptance criteria:**
-    - `GET /` responde 200 e compõe header, hero, busca, marcas, estoque, confiança, trade-in, visita e rodapé nessa ordem
+    - `GET /` responde 200 e compõe header, hero, busca, marcas, estoque e rodapé nessa ordem (confiança, trade-in e visita entram na Phase 6.2)
     - `<title>` e meta description definidos
     - Os dados de contato vêm de `Setting::current()`, sem valores fixos nas views
   - **Feature tests:**
@@ -420,7 +420,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `home_has_no_hardcoded_contact_data` → alterar a linha de Setting muda todos os textos
   - **Traces:** US-1.1; US-5.2; Workflow 1
 
-- [ ] **Task:** Seção hero
+- [x] **Task:** Seção hero
   - **Acceptance criteria:**
     - Foto do pátio de fundo com sombra escura; etiqueta `Used cars · Dracut, MA`, título `Quality used cars. Prices that make sense.`, subtítulo `A local, family-run lot where you get a good car and a straight answer.`
     - Botão `Browse our cars` rola até o estoque (`#inventory`)
@@ -428,7 +428,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#hero`, `#hCta`, `#hImg`
   - **Traces:** US-1.1
 
-- [ ] **Task:** Propagação de Store info para o site
+- [x] **Task:** Propagação de Store info para o site
   - **Acceptance criteria:**
     - Após alterar o `Setting`, a próxima requisição mostra os novos valores em header, `Visit the lot`, rodapé, mapa e botões de WhatsApp
     - Nenhum telefone, horário ou endereço fica fixo no código ou no `.env`
@@ -438,7 +438,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 5.2: Estoque com Livewire
 
-- [ ] **Task:** Componente Livewire `Inventory` com filtros
+- [x] **Task:** Componente Livewire `Inventory` com filtros
   - **Acceptance criteria:**
     - Propriedades `make`, `body` e `max` aplicadas sobre `Car::active()` com eager loading
     - `make` casa com `Str::slug(category.name)`; `body` com o `slug` de `body_types`; `max` é inclusivo
@@ -452,7 +452,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `orders_by_created_at_desc` → mais recentes primeiro
   - **Traces:** US-1.2; Workflow 1
 
-- [ ] **Task:** Paginação incremental `Show more cars`
+- [x] **Task:** Paginação incremental `Show more cars`
   - **Acceptance criteria:**
     - Mostra 12 carros (`CARS_PER_PAGE`); `Show more cars` soma mais 12 sem recarregar
     - Texto `Showing X of Y cars` reflete o total filtrado
@@ -465,15 +465,15 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#more`, `#moreBtn`, `#moreText`, `#count`
   - **Traces:** US-1.4; Key Concepts (Paginação incremental)
 
-- [ ] **Task:** Barra de busca (desktop e celular)
+- [x] **Task:** Barra de busca (desktop e celular)
   - **Acceptance criteria:**
-    - Desktop: Make, Body type (`All types`, SUV, Car, Truck), Max price (`No max`, `$10,000`, `$15,000`, `$20,000`, …) e botão `Search`
+    - Desktop: Make, Body type (`All types`, SUV, Car, Truck), Max price (`No max`, `$10,000`, `$15,000`, `$20,000`, `$25,000`, `$30,000`) e botão `Search`
     - Celular: só Body type e Max price, lado a lado, aplicando o filtro ao mudar
     - Controles acessíveis por teclado e com rótulos
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#searchForm`, `#fMake`, `#fBody`, `#fPrice`, `#searchBtn`
   - **Traces:** US-1.2
 
-- [ ] **Task:** Botões `Shop by make`
+- [x] **Task:** Botões `Shop by make`
   - **Acceptance criteria:**
     - Primeiro `All`, depois uma categoria por botão na ordem de `sort_order`, com a contagem de carros ativos
     - Selecionada fica vermelha; categoria sem carro ativo não aparece
@@ -486,7 +486,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#makes`, `#makesH`
   - **Traces:** US-1.3
 
-- [ ] **Task:** Grade de carros e estado vazio
+- [x] **Task:** Grade de carros e estado vazio
   - **Acceptance criteria:**
     - Grade de `car-card` com 1 coluna no celular e mais colunas em telas maiores
     - Sem resultado, mostra mensagem em inglês e link `wa.me` com o número de Store info
@@ -497,7 +497,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#grid`, estado vazio
   - **Traces:** US-1.5
 
-- [ ] **Task:** Sincronização com a query string
+- [x] **Task:** Sincronização com a query string
   - **Acceptance criteria:**
     - A URL aceita `?make=jeep&body=suv&max=15000&page=2` e aplica os filtros; `page=N` mostra os primeiros `N × 12` carros
     - Mudar filtros atualiza a URL sem recarregar a página
@@ -508,7 +508,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `invalid_query_values_do_not_error` → 200 e sem filtro
   - **Traces:** US-1.6
 
-- [ ] **Task:** Desempenho da listagem
+- [x] **Task:** Desempenho da listagem
   - **Acceptance criteria:**
     - Carros, fotos e categoria carregados com eager loading, sem consulta por card
     - Contagem de consultas da home constante em relação ao número de carros

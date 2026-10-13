@@ -86,4 +86,22 @@ class SettingTest extends TestCase
             $setting->tradeInWhatsappUrl(),
         );
     }
+
+    public function test_current_works_with_a_cache_store_that_serializes(): void
+    {
+        config(['cache.default' => 'file', 'cache.stores.file.path' => storage_path('framework/testing-cache-'.uniqid())]);
+        Cache::purge('file');
+        Setting::factory()->create(['phone' => '(978) 123-4567']);
+
+        $first = Setting::current();
+        app()->forgetInstance(Setting::SCOPED_BINDING); // new request, value now comes from the file cache
+        $second = Setting::current();
+
+        $this->assertInstanceOf(Setting::class, $second);
+        $this->assertSame('(978) 123-4567', $second->phone);
+        $this->assertTrue($second->exists);
+        $this->assertSame($first->id, $second->id);
+
+        Cache::flush();
+    }
 }
