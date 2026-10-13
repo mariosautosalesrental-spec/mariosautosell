@@ -6,7 +6,7 @@ Site institucional com vitrine de carros usados da **Mario's Auto Sales & Rental
 
 O objetivo é um só: **mostrar os carros disponíveis e levar o cliente a chamar a loja no WhatsApp**. Não há venda online, financiamento, reserva nem login de cliente. O fluxo central é: o Mario cadastra um carro no admin → ele aparece no site → o visitante filtra, abre o detalhe e fala com a loja pelo WhatsApp com uma mensagem pronta.
 
-**Fase atual (v1):** sistema funcional em produção — login no admin, banco de dados, upload de fotos e site lendo os carros cadastrados. Hoje o repositório contém apenas os **mockups clicáveis** (HTML + Vite, dados de exemplo) que servem de referência visual e de comportamento; o app real será construído em **Laravel + Livewire + Filament**. Aluguel de carros, apesar do "& Rentals" no logo, está **fora do escopo**; a oficina também não entra no site.
+**Fase atual (v1):** sistema funcional em produção — login no admin, banco de dados, upload de fotos e site lendo os carros cadastrados. O repositório `mario-car` guarda os **mockups clicáveis** (HTML + Vite, dados de exemplo), que servem de referência visual e de comportamento; o app real está em um repositório separado (`marios-auto`), construído em **Laravel + Livewire + Filament** e já implementado fase a fase (ver `project-phases.md`). Aluguel de carros, apesar do "& Rentals" no logo, está **fora do escopo**; a oficina também não entra no site.
 
 ### Key Concepts
 

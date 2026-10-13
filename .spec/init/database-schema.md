@@ -1,6 +1,6 @@
 # Mario's Auto Sales & Rentals — Database Schema
 
-<!-- inputs: project-description.md@sha256:8c1c79fdea95 user-stories.md@sha256:8a1a2a8530b3 -->
+<!-- inputs: project-description.md@sha256:5afc63a6b489 user-stories.md@sha256:3866bcf81c37 -->
 
 ## Overview
 

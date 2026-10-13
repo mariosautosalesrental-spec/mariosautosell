@@ -1,6 +1,6 @@
 # Mario's Auto Sales & Rentals — Project Phases
 
-<!-- inputs: project-description.md@sha256:8c1c79fdea95 user-stories.md@sha256:8a1a2a8530b3 database-schema.md@sha256:05d70d23c9bc -->
+<!-- inputs: project-description.md@sha256:5afc63a6b489 user-stories.md@sha256:3866bcf81c37 database-schema.md@sha256:5c0a44f35fd1 -->
 
 ## Overview
 
@@ -11,7 +11,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 **Referências de design:** os mockups HTML aprovados ficam em `.spec/init/design/` e cada tarefa de tela aponta para eles, com o seletor da seção. O dashboard e o estado `Sold` não existem nos mockups; seguem os tokens do mockup do admin.
 
 **Conventions:**
-- `[ ]` pending · `[x]` done in the codebase (nenhuma tarefa está feita: o app Laravel ainda não existe).
+- `[ ]` pending · `[x]` done in the codebase (`/home/eliel/workspace/projetos/marios-auto`). As tarefas que dependem de contas externas (Laravel Cloud, Google) ficam `[ ]` até serem feitas.
 - Phases and sub-phases are numbered (`Phase 1`, `Phase 5.3`) for reference by AI agents.
 - Business-logic tasks list the **feature tests** to generate (PHPUnit, `php artisan test`); frontend-only tasks list validatable acceptance criteria and a **Design ref**.
 
@@ -1086,7 +1086,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 12.1: Qualidade e segurança
 
-- [ ] **Task:** Testes de jornada completa
+- [x] **Task:** Testes de jornada completa
   - **Acceptance criteria:**
     - Admin cria carro → aparece no site → recebe link de WhatsApp correto → é marcado como vendido → some do site, do sitemap e das contagens → entra no dashboard
     - Jornada de Store info e de categorias cobertas ponta a ponta
@@ -1095,7 +1095,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `store_info_and_category_changes_reach_the_site` → mudanças refletidas
   - **Traces:** Workflows 1, 2, 4, 6, 9
 
-- [ ] **Task:** Segurança e autorização
+- [x] **Task:** Segurança e autorização
   - **Acceptance criteria:**
     - Rotas `/admin/*` exigem login; login com limite de tentativas
     - Descrição e campos de texto escapados na saída (sem XSS)
@@ -1106,7 +1106,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `login_is_rate_limited` → bloqueio após tentativas
   - **Traces:** US-3.1; Tech Stack
 
-- [ ] **Task:** Desempenho e cache
+- [x] **Task:** Desempenho e cache
   - **Acceptance criteria:**
     - `php artisan optimize` e `filament:optimize` rodam sem erro
     - `Setting` em cache; consultas das páginas públicas com eager loading e índices de `cars` usados
@@ -1116,7 +1116,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 12.2: Deploy e entrega
 
-- [ ] **Task:** Variáveis de ambiente e seeders de produção
+- [x] **Task:** Variáveis de ambiente e seeders de produção
   - **Acceptance criteria:**
     - `.env.example` completo e documentado; produção roda apenas apoio e `SettingSeeder` (sem categorias; o Mario as cadastra no admin)
     - `DemoCarSeeder` e usuário demo não rodam em produção
@@ -1145,7 +1145,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - Google Business Profile criado ou atualizado (tarefa operacional, fora do código)
   - **Traces:** US-6.3; Workflow 8
 
-- [ ] **Task:** Guia de uso para a loja
+- [x] **Task:** Guia de uso para a loja
   - **Acceptance criteria:**
     - README (ou página de ajuda) explica em inglês e passo a passo: cadastrar carro, ordenar fotos, ocultar, marcar como vendido, reabrir e ler o dashboard
     - Lista de pendências do cliente para o go-live: fotos reais, domínio, doc fee e revisão jurídica dos textos

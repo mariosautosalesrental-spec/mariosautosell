@@ -1,6 +1,6 @@
 # Mario's Auto Sales & Rentals — User Stories
 
-<!-- inputs: project-description.md@sha256:8c1c79fdea95 -->
+<!-- inputs: project-description.md@sha256:5afc63a6b489 -->
 
 ## Overview
 
@@ -620,41 +620,41 @@ Todas as histórias abaixo pertencem à v1 (sistema funcional em produção, em 
 
 | ID | Story | Priority | Status |
 |----|-------|----------|--------|
-| US-1.1 | Landing header and hero | High | Pending |
-| US-1.2 | Filter cars by make, body type and max price | High | Pending |
-| US-1.3 | Shop by make buttons | High | Pending |
-| US-1.4 | Load more cars (incremental pagination) | High | Pending |
-| US-2.1 | Car card | High | Pending |
-| US-2.2 | Car detail modal | High | Pending |
-| US-2.4 | Massachusetts used-vehicle warranty | High | Pending |
-| US-2.5 | Ask about a car on WhatsApp | High | Pending |
-| US-3.1 | Admin login | High | Pending |
-| US-3.2 | Cars list | High | Pending |
-| US-3.3 | Create a car | High | Pending |
-| US-3.4 | Photos upload and ordering | High | Pending |
-| US-3.5 | Edit a car | High | Pending |
-| US-3.6 | Publish and hide a car | High | Pending |
-| US-4.1 | Manage categories | High | Pending |
-| US-5.1 | Edit store information | High | Pending |
-| US-5.2 | Store info propagates to the site | High | Pending |
-| US-6.4 | Keyboard and screen-reader access | High | Pending |
+| US-1.1 | Landing header and hero | High | Done |
+| US-1.2 | Filter cars by make, body type and max price | High | Done |
+| US-1.3 | Shop by make buttons | High | Done |
+| US-1.4 | Load more cars (incremental pagination) | High | Done |
+| US-2.1 | Car card | High | Done |
+| US-2.2 | Car detail modal | High | Done |
+| US-2.4 | Massachusetts used-vehicle warranty | High | Done |
+| US-2.5 | Ask about a car on WhatsApp | High | Done |
+| US-3.1 | Admin login | High | Done |
+| US-3.2 | Cars list | High | Done |
+| US-3.3 | Create a car | High | Done |
+| US-3.4 | Photos upload and ordering | High | Done |
+| US-3.5 | Edit a car | High | Done |
+| US-3.6 | Publish and hide a car | High | Done |
+| US-4.1 | Manage categories | High | Done |
+| US-5.1 | Edit store information | High | Done |
+| US-5.2 | Store info propagates to the site | High | Done |
+| US-6.4 | Keyboard and screen-reader access | High | Done |
 | US-7.1 | Production deploy | High | Pending |
-| US-1.5 | Empty state when no car matches | Medium | Pending |
-| US-2.3 | Car page by slug | Medium | Pending |
-| US-2.6 | Trade-in offer request | Medium | Pending |
-| US-2.7 | Trust block and Visit the lot | Medium | Pending |
-| US-3.7 | Delete a car | Medium | Pending |
-| US-4.2 | Reorder categories | Medium | Pending |
-| US-4.3 | Delete a category | Medium | Pending |
-| US-6.1 | Legal pages | Medium | Pending |
-| US-6.2 | SEO metadata and structured data | Medium | Pending |
-| US-7.2 | Photo conversion on upload | Medium | Pending |
-| US-1.6 | Shareable filter URLs | Low | Pending |
-| US-6.3 | Sitemap and robots | Low | Pending |
-| US-6.5 | Reduced motion and light theme | Low | Pending |
-| US-8.1 | Mark a car as sold | High | Pending |
-| US-8.3 | Filter cars by status in the admin list | High | Pending |
-| US-8.4 | Monthly sales on the dashboard | High | Pending |
-| US-8.2 | Reopen a sold car | Medium | Pending |
-| US-8.5 | Inventory and recent sales on the dashboard | Medium | Pending |
-| US-8.6 | Sales chart for the last 6 months | Low | Pending |
+| US-1.5 | Empty state when no car matches | Medium | Done |
+| US-2.3 | Car page by slug | Medium | Done |
+| US-2.6 | Trade-in offer request | Medium | Done |
+| US-2.7 | Trust block and Visit the lot | Medium | Done |
+| US-3.7 | Delete a car | Medium | Done |
+| US-4.2 | Reorder categories | Medium | Done |
+| US-4.3 | Delete a category | Medium | Done |
+| US-6.1 | Legal pages | Medium | Done |
+| US-6.2 | SEO metadata and structured data | Medium | Done |
+| US-7.2 | Photo conversion on upload | Medium | Done |
+| US-1.6 | Shareable filter URLs | Low | Done |
+| US-6.3 | Sitemap and robots | Low | Done |
+| US-6.5 | Reduced motion and light theme | Low | Done |
+| US-8.1 | Mark a car as sold | High | Done |
+| US-8.3 | Filter cars by status in the admin list | High | Done |
+| US-8.4 | Monthly sales on the dashboard | High | Done |
+| US-8.2 | Reopen a sold car | Medium | Done |
+| US-8.5 | Inventory and recent sales on the dashboard | Medium | Done |
+| US-8.6 | Sales chart for the last 6 months | Low | Done |
