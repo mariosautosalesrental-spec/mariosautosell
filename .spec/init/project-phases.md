@@ -707,7 +707,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 8.1: Login
 
-- [ ] **Task:** Acesso ao painel e usuários
+- [x] **Task:** Acesso ao painel e usuários
   - **Acceptance criteria:**
     - `/admin` exige login; visitante é redirecionado para a tela de login
     - Credenciais inválidas mostram erro e não entram; todos os usuários têm o mesmo acesso
@@ -720,7 +720,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Admin.html` → `#loginForm`, `#lEmail`, `#lPass`
   - **Traces:** US-3.1; Workflow 4
 
-- [ ] **Task:** Tela de login com a marca
+- [x] **Task:** Tela de login com a marca
   - **Acceptance criteria:**
     - Logo, textos em inglês e campos e-mail/senha como no mockup
     - Usável no celular
@@ -729,7 +729,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 8.2: Store info
 
-- [ ] **Task:** Página Filament `StoreSettings`
+- [x] **Task:** Página Filament `StoreSettings`
   - **Acceptance criteria:**
     - Formulário único com WhatsApp, Phone, horários (Mon–Fri, Saturday, Sunday, texto livre) e endereço (street, city, state, ZIP)
     - Todos obrigatórios; WhatsApp só dígitos com código do país (`^[1-9][0-9]{7,14}$`)
@@ -742,14 +742,14 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `saving_store_info_clears_cache` → valor novo no próximo `Setting::current()`
   - **Traces:** US-5.1; Workflow 6
 
-- [ ] **Task:** Visual da tela Store info
+- [x] **Task:** Visual da tela Store info
   - **Acceptance criteria:**
     - Campos agrupados como no mockup, com mensagem de sucesso após salvar
     - Usável no celular
   - **Design ref:** `.spec/init/design/Mario's Admin.html` → `#storeForm`, `#phInput`, `#sMF`, `#sSat`, `#sSun`
   - **Traces:** US-5.1
 
-- [ ] **Task:** Teste de integração admin → site
+- [x] **Task:** Teste de integração admin → site
   - **Acceptance criteria:**
     - Alterar Store info no painel muda header, visita, rodapé e links de WhatsApp na próxima visita ao site
   - **Feature tests:**
@@ -758,7 +758,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 8.3: Categories
 
-- [ ] **Task:** `CategoryResource` com lista, criar e renomear
+- [x] **Task:** `CategoryResource` com lista, criar e renomear
   - **Acceptance criteria:**
     - Lista com nome e quantidade de carros (todos os carros da categoria), ordenada por `sort_order`
     - Criar e renomear com nome obrigatório e único; nova categoria vai para o fim
@@ -770,7 +770,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Admin.html` → `#catFilter`, `#newCat`, `#addCat`
   - **Traces:** US-4.1; Workflow 5
 
-- [ ] **Task:** Reordenar categorias
+- [x] **Task:** Reordenar categorias
   - **Acceptance criteria:**
     - Setas para cima e para baixo trocam o `sort_order` com a vizinha
     - A ordem do admin é a ordem dos botões `Shop by make`; primeira não sobe e última não desce
@@ -780,7 +780,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `site_buttons_follow_admin_order` → site na ordem nova
   - **Traces:** US-4.2
 
-- [ ] **Task:** Excluir categoria
+- [x] **Task:** Excluir categoria
   - **Acceptance criteria:**
     - Exclusão pede confirmação
     - Categoria com qualquer carro (ativo, oculto ou vendido) não é excluída e mostra mensagem explicando
@@ -791,7 +791,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `sold_car_still_blocks_category_deletion` → bloqueia
   - **Traces:** US-4.3
 
-- [ ] **Task:** Visual das telas de categorias
+- [x] **Task:** Visual das telas de categorias
   - **Acceptance criteria:**
     - Lista e edição como no mockup, usáveis no celular
   - **Design ref:** `.spec/init/design/Mario's Admin.html` → `#catEdit`, `#newCat`

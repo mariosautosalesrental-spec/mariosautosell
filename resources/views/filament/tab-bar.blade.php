@@ -1,7 +1,7 @@
 @php
     $items = collect(filament()->getNavigation())
         ->flatMap(fn ($group) => $group->getItems())
-        ->filter(fn ($item) => $item->isVisible());
+        ->filter(fn ($item) => $item->isVisible() && ! $item->shouldOpenUrlInNewTab());
 @endphp
 
 @if ($items->isNotEmpty())

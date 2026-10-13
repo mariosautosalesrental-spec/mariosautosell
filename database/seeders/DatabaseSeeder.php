@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         if (app()->environment('local')) {
-            $this->call(DemoCarSeeder::class);
+            $this->call([DemoCarSeeder::class, AdminUserSeeder::class]);
         }
     }
 }

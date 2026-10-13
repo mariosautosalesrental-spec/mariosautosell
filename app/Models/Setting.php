@@ -20,6 +20,9 @@ class Setting extends Model
 
     public const SCOPED_BINDING = 'store.settings';
 
+    /** Columns edited in the admin form. */
+    public const FORM_FIELDS = ['whatsapp', 'phone', 'street', 'city', 'state', 'zip', 'hours_mon_fri', 'hours_sat', 'hours_sun'];
+
     protected static function booted(): void
     {
         static::saved(fn () => static::flushCache());
