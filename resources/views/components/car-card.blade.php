@@ -6,7 +6,7 @@
 @endphp
 
 <article class="car">
-    <a class="car-photo" href="{{ url('/cars/'.$car->slug) }}" aria-label="View {{ $car->fullName() }}"
+    <a class="car-photo" href="{{ route('cars.show', $car->slug) }}" aria-label="View {{ $car->fullName() }}"
        x-on:click.prevent="Livewire.dispatch('open-car', { id: {{ $car->id }} })">
         @if ($photo)
             <img src="{{ $photo->thumbUrl() }}" alt="{{ $alt }}" loading="lazy">

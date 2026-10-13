@@ -88,6 +88,30 @@ class Setting extends Model
         return 'https://wa.me/'.$this->whatsapp.'?text='.rawurlencode($message);
     }
 
+    /** "Dracut, MA 01826" */
+    public function cityLine(): string
+    {
+        return "{$this->city}, {$this->state} {$this->zip}";
+    }
+
+    /** "1336 Merrimack Ave, Dracut, MA 01826" */
+    public function fullAddress(): string
+    {
+        return "{$this->street}, {$this->cityLine()}";
+    }
+
+    /** Link that opens the store address in Google Maps. */
+    public function mapsUrl(): string
+    {
+        return 'https://www.google.com/maps/search/?api=1&query='.urlencode(str_replace(',', '', $this->fullAddress()));
+    }
+
+    /** Embeddable Google Maps view of the store address (no API key needed). */
+    public function mapsEmbedUrl(): string
+    {
+        return 'https://www.google.com/maps?q='.urlencode($this->fullAddress()).'&output=embed';
+    }
+
     public function tradeInWhatsappUrl(): string
     {
         return $this->whatsappUrl("Hi Mario, I'd like an offer on my car.");

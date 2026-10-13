@@ -14,4 +14,10 @@
     </section>
 
     <livewire:inventory />
+
+    <x-site.trust />
+    <x-site.trade-in />
+    <x-site.visit />
+
+    <livewire:car-detail />
 </x-layouts.app>

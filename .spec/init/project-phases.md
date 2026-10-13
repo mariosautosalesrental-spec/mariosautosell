@@ -524,7 +524,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 6.1: Detalhe do carro
 
-- [ ] **Task:** Componente Livewire `CarDetail` (modal)
+- [x] **Task:** Componente Livewire `CarDetail` (modal)
   - **Acceptance criteria:**
     - Abre ao clicar em `View details` sem recarregar; mostra galeria, nome, versão, milhas, preço e `Includes dealer fees. Plus tax, title & registration.`
     - Specs: motor (opcional), câmbio, tração, carroceria e cor, e descrição
@@ -532,14 +532,14 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#detail`, `#dTitle`, `#dMeta`, `#dPrice`, `#dSpecs`, `#dWa`
   - **Traces:** US-2.2
 
-- [ ] **Task:** Acessibilidade do modal
+- [x] **Task:** Acessibilidade do modal
   - **Acceptance criteria:**
     - Foco preso dentro do modal; `Esc` fecha; ao fechar, o foco volta ao card de origem
     - Botão de fechar com `aria-label` e papel `dialog` com título associado
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#detail`, `#dClose`
   - **Traces:** US-2.2; US-6.4
 
-- [ ] **Task:** Página `/cars/{slug}`
+- [x] **Task:** Página `/cars/{slug}`
   - **Acceptance criteria:**
     - Mostra o mesmo conteúdo do detalhe para carro ativo
     - Carro inexistente, oculto ou vendido retorna 404
@@ -552,7 +552,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `car_page_title_has_expected_format` → título exato
   - **Traces:** US-2.3; Workflow 2
 
-- [ ] **Task:** Faixa de garantia de Massachusetts no detalhe
+- [x] **Task:** Faixa de garantia de Massachusetts no detalhe
   - **Acceptance criteria:**
     - Exibe a faixa conforme `Car::maWarranty()` no modal e na página
     - Sem milhagem ou com 125.000 mi ou mais, a faixa não aparece
@@ -563,14 +563,14 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#dWarranty`
   - **Traces:** US-2.4
 
-- [ ] **Task:** Galeria de fotos
+- [x] **Task:** Galeria de fotos
   - **Acceptance criteria:**
     - Miniaturas navegáveis por clique e teclado; usa `largeUrl()` na foto grande e `thumbUrl()` nas miniaturas
     - `alt` descritivo (`{color} {title}`)
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#dImg`
   - **Traces:** US-2.2; US-6.4
 
-- [ ] **Task:** Links de WhatsApp no card, no modal e na página
+- [x] **Task:** Links de WhatsApp no card, no modal e na página
   - **Acceptance criteria:**
     - Todos usam `Car::whatsappUrl()` e abrem `wa.me` com a mensagem pronta
     - Alterar o número em Store info muda todos os links
@@ -579,7 +579,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `whatsapp_links_follow_setting_number` → refletem o número atual
   - **Traces:** US-2.5
 
-- [ ] **Task:** Ligar o `car-card` ao modal
+- [x] **Task:** Ligar o `car-card` ao modal
   - **Acceptance criteria:**
     - `View details` abre o `CarDetail` do carro certo
     - Selo `Price drop` só aparece nos carros marcados
@@ -589,7 +589,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 6.2: Seções de conversão
 
-- [ ] **Task:** Faixa de trade-in
+- [x] **Task:** Faixa de trade-in
   - **Acceptance criteria:**
     - Faixa vermelha com `Trading in? Get a cash offer.` e botão `Value my car`
     - O botão abre `wa.me` com `Hi Mario, I'd like an offer on my car.`; sem formulário e sem lead salvo
@@ -598,14 +598,14 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#trade`
   - **Traces:** US-2.6; Workflow 3
 
-- [ ] **Task:** Bloco de confiança
+- [x] **Task:** Bloco de confiança
   - **Acceptance criteria:**
     - Três colunas: preços claros, garantia de usados de Massachusetts e loja local e familiar
     - Empilha em uma coluna no celular
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#why`
   - **Traces:** US-2.7
 
-- [ ] **Task:** Seção `Visit the lot`
+- [x] **Task:** Seção `Visit the lot`
   - **Acceptance criteria:**
     - Endereço, telefone e horários de Store info; `Closed` aparece como cadastrado
     - Mapa do Google incorporado (iframe) e botão `Open in Google Maps` apontando para o endereço atual

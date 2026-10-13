@@ -8,7 +8,7 @@
         <div class="hinfo">
             <div class="hitem">
                 <x-ui.icon name="pin" />
-                <span><b>{{ $store->street }}</b><small>{{ $store->city }}, {{ $store->state }} {{ $store->zip }}</small></span>
+                <span><b>{{ $store->street }}</b><small>{{ $store->cityLine() }}</small></span>
             </div>
             <div class="hitem">
                 <x-ui.icon name="clock" />
