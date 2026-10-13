@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,18 +18,9 @@ class SettingSeeder extends Seeder
             return;
         }
 
-        DB::table('settings')->insert([
-            'whatsapp' => '19784174036',
-            'phone' => '(978) 417-4036',
-            'street' => '1336 Merrimack Ave',
-            'city' => 'Dracut',
-            'state' => 'MA',
-            'zip' => '01826',
-            'hours_mon_fri' => '9:00 AM – 6:00 PM',
-            'hours_sat' => '9:00 AM – 4:00 PM',
-            'hours_sun' => 'Closed',
+        DB::table('settings')->insert(array_merge(Setting::defaults(), [
             'created_at' => now(),
             'updated_at' => now(),
-        ]);
+        ]));
     }
 }

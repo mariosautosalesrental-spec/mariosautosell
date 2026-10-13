@@ -184,12 +184,12 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 3.1: Models e relacionamentos
 
-- [ ] **Task:** Models `BodyType`, `Transmission` e `Drivetrain`
+- [x] **Task:** Models `BodyType`, `Transmission` e `Drivetrain`
   - **Acceptance criteria:**
     - Cada um tem `hasMany(Car)`, `$fillable` e escopo `ordered` por `sort_order`
   - **Traces:** Tabelas body_types, transmissions, drivetrains
 
-- [ ] **Task:** Model `Category`
+- [x] **Task:** Model `Category`
   - **Acceptance criteria:**
     - `hasMany(Car)`; escopo `ordered`; escopo `withActiveCars()` que traz só categorias com pelo menos um carro ativo e a contagem `active_cars_count`
     - Excluir categoria que tem carros (ativos, ocultos ou vendidos) lança exceção de domínio com mensagem clara
@@ -199,14 +199,14 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `category_with_cars_cannot_be_deleted` → qualquer carro, inclusive vendido, bloqueia a exclusão
   - **Traces:** Tabela categories; US-1.3; US-4.3
 
-- [ ] **Task:** Model `Car` com relacionamentos e casts
+- [x] **Task:** Model `Car` com relacionamentos e casts
   - **Acceptance criteria:**
     - `belongsTo` Category, BodyType, Transmission e Drivetrain; `hasMany(CarPhoto)` ordenado por `sort_order`
     - Casts: `is_active` e `price_drop` booleanos, `price`, `mileage` e `sold_price` inteiros, `sold_at` data/hora
     - `$fillable` definido (sem `guarded = []`)
   - **Traces:** Tabela cars; Key Concepts (Car)
 
-- [ ] **Task:** Model `CarPhoto` com URLs
+- [x] **Task:** Model `CarPhoto` com URLs
   - **Acceptance criteria:**
     - `belongsTo(Car)`; métodos `url()`, `thumbUrl()` e `largeUrl()` leem o disco configurado
     - `thumbUrl()` e `largeUrl()` caem para a imagem original enquanto a conversão não existe
@@ -214,7 +214,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `photo_urls_fall_back_to_original_when_conversion_missing` → `thumbUrl()` devolve a URL original
   - **Traces:** Tabela car_photos; US-3.4; US-7.2
 
-- [ ] **Task:** Model `Setting` com cache
+- [x] **Task:** Model `Setting` com cache
   - **Acceptance criteria:**
     - `Setting::current()` devolve a única linha usando `Cache::rememberForever('settings')`
     - Salvar ou apagar limpa o cache, e o valor novo aparece na chamada seguinte
@@ -224,7 +224,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `saving_setting_clears_cache` → valor novo é lido depois do save
   - **Traces:** Tabela settings; US-5.1; US-5.2
 
-- [ ] **Task:** Model `User` pronto para o Filament
+- [x] **Task:** Model `User` pronto para o Filament
   - **Acceptance criteria:**
     - Implementa `FilamentUser` e `canAccessPanel` retorna `true` para qualquer usuário (sem níveis de permissão na v1)
     - `password` com cast `hashed`
@@ -232,7 +232,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `any_user_can_access_admin_panel` → `canAccessPanel` verdadeiro
   - **Traces:** Tabela users; US-3.1
 
-- [ ] **Task:** Factories de todos os models
+- [x] **Task:** Factories de todos os models
   - **Acceptance criteria:**
     - `CarFactory` com estados `inactive()`, `sold()`, `priceDrop()` e `withPhotos(n)`
     - Factories para BodyType, Transmission, Drivetrain, Category, CarPhoto, Setting e User
@@ -241,7 +241,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 3.2: Regras de negócio do carro
 
-- [ ] **Task:** Escopos de situação do carro
+- [x] **Task:** Escopos de situação do carro
   - **Acceptance criteria:**
     - `active()` = `is_active` verdadeiro e `sold_at` nulo; `sold()` = `sold_at` preenchido; `hidden()` = inativo e não vendido; `latestFirst()` ordena por `created_at` decrescente
     - Atributo `status` devolve `on_site`, `hidden` ou `sold`
@@ -251,7 +251,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `latest_first_orders_by_created_at_desc` → ordem decrescente
   - **Traces:** US-1.2; US-8.3; Key Concepts (Publicação, Sold)
 
-- [ ] **Task:** Geração de `slug`
+- [x] **Task:** Geração de `slug`
   - **Acceptance criteria:**
     - O slug vem de título + versão + id (ex.: `2019-jeep-compass-limited-4x4-12`) e é gravado após o primeiro save
     - Muda quando título ou versão mudam e continua único
@@ -262,7 +262,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `slug_updates_when_title_changes` → novo slug, único
   - **Traces:** Tabela cars; US-2.3
 
-- [ ] **Task:** `Car::maWarranty()` — garantia de usados de Massachusetts
+- [x] **Task:** `Car::maWarranty()` — garantia de usados de Massachusetts
   - **Acceptance criteria:**
     - Menos de 40.000 mi → `90 days or 3,750 miles`; 40.000–79.999 → `60 days or 2,500 miles`; 80.000–124.999 → `30 days or 1,250 miles`; 125.000 ou mais → `null`
     - Milhagem nula → `null`
@@ -273,7 +273,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `warranty_is_null_without_mileage` → `null`
   - **Traces:** US-2.4; Key Concepts (Garantia)
 
-- [ ] **Task:** Links de WhatsApp (`Car::whatsappUrl()` e trade-in)
+- [x] **Task:** Links de WhatsApp (`Car::whatsappUrl()` e trade-in)
   - **Acceptance criteria:**
     - Carro: `https://wa.me/<whatsapp>?text=` com `Hi Mario, is the {title} {trim} still available?` codificada em URL
     - Sem `trim`, a mensagem não tem espaço duplo nem `null`
@@ -286,7 +286,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `trade_in_whatsapp_url_has_expected_message` → texto do trade-in
   - **Traces:** US-2.5; US-2.6; Key Concepts (Mensagem de WhatsApp)
 
-- [ ] **Task:** Marcar como vendido e reabrir (`markAsSold()` e `reopen()`)
+- [x] **Task:** Marcar como vendido e reabrir (`markAsSold()` e `reopen()`)
   - **Acceptance criteria:**
     - `markAsSold($soldAt = hoje, $soldPrice = price)` grava `sold_at`, `sold_price` e `is_active = false` na mesma transação
     - Data futura e valor menor que 1 são rejeitados com erro de validação
@@ -302,7 +302,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `reopen_rejects_car_not_sold` → erro
   - **Traces:** US-8.1; US-8.2; Key Concepts (Sold)
 
-- [ ] **Task:** Regra de publicação (pode ficar ativo?)
+- [x] **Task:** Regra de publicação (pode ficar ativo?)
   - **Acceptance criteria:**
     - Carro só pode ser ativo com preço e pelo menos uma foto
     - Carro vendido nunca pode ser ativo (exige reabrir antes)
@@ -315,7 +315,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `draft_without_price_can_be_saved_inactive` → inativo sem preço é aceito
   - **Traces:** US-3.3; US-3.6
 
-- [ ] **Task:** `DemoCarSeeder` (somente ambiente local)
+- [x] **Task:** `DemoCarSeeder` (somente ambiente local)
   - **Acceptance criteria:**
     - Cria as marcas de exemplo (Chevrolet, Fiat, Jeep e Volkswagen) e carros de exemplo com fotos de `database/seeders/demo-photos/` nessas categorias, incluindo um com `price_drop`, um oculto e um vendido
     - Só roda quando `APP_ENV=local`
