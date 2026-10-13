@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap');
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+/*
+ * Admin theme from the approved mockup (".spec/init/design/Mario's Admin.html"):
+ * dark left rail on desktop, bottom tab bar on phone, one red accent,
+ * Barlow Condensed headings. Light theme only.
+ */
+:root {
+    --mario-bg: #F4F3F1;
+    --mario-rail: #18161A;
+    --mario-rail-ink: #EDEAE6;
+    --mario-rail-muted: #A7A19A;
+    --mario-accent: #B3121F;
+    --mario-line: #E4E0DA;
+    --mario-display: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+}
+
+.fi-body {
+    background: var(--mario-bg);
+}
+
+/* Headings in the mockup's signage type */
+.fi-header-heading,
+.fi-simple-header-heading,
+.fi-section-header-heading,
+.fi-modal-heading {
+    font-family: var(--mario-display);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    font-weight: 800;
+}
+
+.fi-header-heading {
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+    line-height: 1;
+}
+
+.fi-section-header-heading,
+.fi-modal-heading {
+    font-weight: 700;
+}
+
+/* Cards: white, soft border, 12px radius */
+.fi-section,
+.fi-ta-ctn {
+    border-radius: 12px;
+}
+
+/* Dark rail on desktop */
+@media (min-width: 64rem) {
+    .fi-sidebar {
+        background: var(--mario-rail);
+        color: var(--mario-rail-ink);
+    }
+
+    .fi-sidebar .fi-sidebar-item-label,
+    .fi-sidebar .fi-sidebar-group-label {
+        color: var(--mario-rail-ink);
+        font-weight: 600;
+    }
+
+    .fi-sidebar .fi-sidebar-item-btn > .fi-icon,
+    .fi-sidebar .fi-sidebar-group-btn .fi-icon {
+        color: var(--mario-rail-muted);
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-sidebar-item-has-url > .fi-sidebar-item-btn:hover {
+        background: rgb(255 255 255 / 0.07);
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+        background: var(--mario-accent);
+    }
+
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon,
+    .fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+        color: #fff;
+    }
+}
+
+/* Bottom tab bar on phone (markup in resources/views/filament/tab-bar.blade.php) */
+.mario-tabbar {
+    display: none;
+}
+
+@media (max-width: 63.999rem) {
+    .mario-tabbar {
+        position: fixed;
+        inset-inline: 0;
+        bottom: 0;
+        z-index: 40;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(0, 1fr);
+        background: #fff;
+        border-top: 1px solid var(--mario-line);
+        padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .mario-tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        min-height: 52px;
+        border-radius: 8px;
+        color: #625E58;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .mario-tab svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .mario-tab[aria-current='page'] {
+        color: var(--mario-accent);
+    }
+
+    .fi-main-ctn {
+        padding-bottom: 5.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

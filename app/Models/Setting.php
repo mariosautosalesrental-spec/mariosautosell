@@ -18,6 +18,8 @@ class Setting extends Model
 
     public const CACHE_KEY = 'settings';
 
+    public const SCOPED_BINDING = 'store.settings';
+
     protected static function booted(): void
     {
         static::saved(fn () => static::flushCache());
@@ -50,12 +52,23 @@ class Setting extends Model
      */
     public static function current(): static
     {
+        // Resolved once per request (scoped binding), so a page with a dozen
+        // cards does not read the cache store a dozen times.
+        return app(self::SCOPED_BINDING);
+    }
+
+    /**
+     * Reads the row through the cache; used by the scoped binding.
+     */
+    public static function loadCached(): static
+    {
         return Cache::rememberForever(self::CACHE_KEY, fn () => static::query()->first() ?? static::query()->create(static::defaults()));
     }
 
     public static function flushCache(): void
     {
         Cache::forget(self::CACHE_KEY);
+        app()->forgetInstance(self::SCOPED_BINDING);
     }
 
     /**

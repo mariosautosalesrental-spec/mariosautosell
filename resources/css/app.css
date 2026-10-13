@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=Yellowtail&display=swap');
 @import 'tailwindcss';
+@import './site.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -29,11 +30,5 @@
 @layer base {
     html {
         color-scheme: light;
-    }
-
-    body {
-        background: var(--color-bg);
-        color: var(--color-ink);
-        font-family: var(--font-body);
     }
 }

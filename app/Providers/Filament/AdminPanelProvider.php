@@ -10,6 +10,7 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -27,8 +28,14 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->brandName("Mario's Auto Sales & Rentals")
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3.25rem')
+            ->favicon(asset('images/logo.png'))
+            ->darkMode(false)
+            ->renderHook(PanelsRenderHook::BODY_END, fn (): string => view('filament.tab-bar')->render())
             ->font('Barlow', provider: \Filament\FontProviders\GoogleFontProvider::class)
             ->colors([
                 'primary' => Color::hex('#B3121F'),

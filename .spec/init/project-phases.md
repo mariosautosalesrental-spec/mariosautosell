@@ -333,7 +333,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 4.1: Layout e componentes do site
 
-- [ ] **Task:** Layout base `layouts/app.blade.php`
+- [x] **Task:** Layout base `layouts/app.blade.php`
   - **Acceptance criteria:**
     - `<html lang="en">`, viewport, fontes, `@vite`, link `Skip to content` e tema claro fixo
     - Estrutura `header`, `main id="main"` e `footer`
@@ -341,7 +341,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → estrutura geral do `<body>`
   - **Traces:** US-6.4; US-6.5
 
-- [ ] **Task:** Componente `header`
+- [x] **Task:** Componente `header`
   - **Acceptance criteria:**
     - Fixo no topo; logo à esquerda (56px no desktop, 42px no celular, `width: auto`)
     - À direita endereço, horário e telefone com ícones, lidos de `Setting::current()`
@@ -350,14 +350,14 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → header / `#top`
   - **Traces:** US-1.1; US-5.2
 
-- [ ] **Task:** Componente `footer`
+- [x] **Task:** Componente `footer`
   - **Acceptance criteria:**
     - Logo, aviso legal de preço, links `Privacy Policy`, `Terms of Use` e `Accessibility` e copyright
     - Aviso de que o preço inclui taxas da loja e exclui impostos, título e registro
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#legal` / rodapé
   - **Traces:** US-2.7; US-6.1
 
-- [ ] **Task:** Componentes de UI reutilizáveis e ícones
+- [x] **Task:** Componentes de UI reutilizáveis e ícones
   - **Acceptance criteria:**
     - Botões (vermelho, verde de WhatsApp, secundário), chips, selo `Price drop` e títulos de seção
     - Ícones SVG (telefone, pino, relógio, WhatsApp, busca, fechar, setas); decorativos com `aria-hidden`, de ação com `aria-label`
@@ -365,7 +365,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → botões, chips e ícones
   - **Traces:** US-6.4
 
-- [ ] **Task:** Componente `car-card`
+- [x] **Task:** Componente `car-card`
   - **Acceptance criteria:**
     - Foto de capa (a primeira por `sort_order`), selo `Price drop` só quando `price_drop`, nome, versão, chips de milhas, câmbio e tração
     - Preço em USD sem centavos com `incl. dealer fees` e botão verde `Ask about this car`
@@ -375,7 +375,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#grid` (card do carro)
   - **Traces:** US-2.1
 
-- [ ] **Task:** Acessibilidade e movimento globais
+- [x] **Task:** Acessibilidade e movimento globais
   - **Acceptance criteria:**
     - Anel de foco visível em todos os controles; `prefers-reduced-motion` desliga transições, zoom e deslocamentos
     - Contraste de texto de pelo menos 4.5:1 com os tokens de cor
@@ -383,7 +383,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → regras de foco e movimento
   - **Traces:** US-6.4; US-6.5
 
-- [ ] **Task:** Formatadores de exibição
+- [x] **Task:** Formatadores de exibição
   - **Acceptance criteria:**
     - Preço `$1,250`, milhas `12,345 mi` e valores nulos tratados
     - Disponíveis como helpers ou métodos de view usados por site e admin
@@ -394,7 +394,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 4.2: Tema do admin
 
-- [ ] **Task:** Tema do Filament com a identidade do mockup
+- [x] **Task:** Tema do Filament com a identidade do mockup
   - **Acceptance criteria:**
     - Barra lateral escura (`#18161A`), vermelho de destaque, fontes Barlow e cards claros
     - No celular, navegação em barra inferior com Cars, Categories e Store info
