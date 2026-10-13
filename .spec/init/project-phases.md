@@ -105,7 +105,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 2.1: Migrations
 
-- [ ] **Task:** Migrations das tabelas de apoio `body_types`, `transmissions` e `drivetrains`
+- [x] **Task:** Migrations das tabelas de apoio `body_types`, `transmissions` e `drivetrains`
   - **Acceptance criteria:**
     - Cada tabela tem `id`, `name` (único), `slug` (único), `sort_order` (inteiro, padrão 0) e timestamps
     - Nenhuma coluna usa enum
@@ -113,23 +113,23 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `lookup_tables_have_unique_name_and_slug` → inserir duplicado de `name` ou `slug` lança exceção
   - **Traces:** Tabelas body_types, transmissions, drivetrains
 
-- [ ] **Task:** Migration da tabela `categories`
+- [x] **Task:** Migration da tabela `categories`
   - **Acceptance criteria:**
     - Colunas `id`, `name` (único, obrigatório), `sort_order` (padrão 0) e timestamps
   - **Traces:** Tabela categories; US-4.1
 
-- [ ] **Task:** Migration da tabela `users` e das tabelas do framework
+- [x] **Task:** Migration da tabela `users` e das tabelas do framework
   - **Acceptance criteria:**
     - `users` tem `name`, `email` (único), `password`, `remember_token` e timestamps
     - As tabelas padrão `password_reset_tokens`, `sessions` e `cache` existem; não há tabelas `jobs` nem `failed_jobs`
   - **Traces:** Tabela users; US-3.1
 
-- [ ] **Task:** Migration da tabela `settings`
+- [x] **Task:** Migration da tabela `settings`
   - **Acceptance criteria:**
     - Colunas `whatsapp`, `phone`, `street`, `city`, `state`, `zip`, `hours_mon_fri`, `hours_sat`, `hours_sun` (todas obrigatórias) e timestamps
   - **Traces:** Tabela settings; US-5.1
 
-- [ ] **Task:** Migration da tabela `cars`
+- [x] **Task:** Migration da tabela `cars`
   - **Acceptance criteria:**
     - FKs `category_id`, `body_type_id`, `transmission_id`, `drivetrain_id`, todas `restrict on delete`
     - Colunas `title`, `trim` (nulo), `slug` (único), `price` e `mileage` (inteiros sem sinal, nulos), `color`, `engine`, `description` (nulos), `is_active` (padrão `true`), `price_drop` (padrão `false`), `sold_at` e `sold_price` (nulos)
@@ -140,7 +140,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `cars_slug_must_be_unique` → duas inserções com o mesmo `slug` falham
   - **Traces:** Tabela cars; US-3.3; US-3.6; US-8.1
 
-- [ ] **Task:** Migration da tabela `car_photos`
+- [x] **Task:** Migration da tabela `car_photos`
   - **Acceptance criteria:**
     - Colunas `car_id` (FK com `cascade on delete`), `file_path`, `sort_order` (padrão 0) e timestamps
     - Índice em `(car_id, sort_order)`
@@ -150,7 +150,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 2.2: Seeders
 
-- [ ] **Task:** Seeders das tabelas de apoio
+- [x] **Task:** Seeders das tabelas de apoio
   - **Acceptance criteria:**
     - body_types: SUV, Car, Truck; transmissions: Automatic, Manual; drivetrains: FWD, RWD, AWD, 4WD, cada um com `slug` e `sort_order`
     - Rodar duas vezes não duplica linhas (idempotente)
@@ -159,7 +159,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `lookup_seeders_are_idempotent` → segunda execução mantém as mesmas contagens
   - **Traces:** Seeds de apoio; US-3.3
 
-- [ ] **Task:** `SettingSeeder` com os dados da loja
+- [x] **Task:** `SettingSeeder` com os dados da loja
   - **Acceptance criteria:**
     - Cria exatamente uma linha: whatsapp `19784174036`, phone `(978) 417-4036`, street `1336 Merrimack Ave`, city `Dracut`, state `MA`, zip `01826`, hours_mon_fri `9:00 AM – 6:00 PM`, hours_sat `9:00 AM – 4:00 PM`, hours_sun `Closed`
     - Rodar de novo não cria segunda linha nem sobrescreve valores já editados no admin
@@ -168,10 +168,10 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `setting_seeder_does_not_overwrite_edited_values` → valor alterado permanece
   - **Traces:** Seeds; US-5.1
 
-- [ ] **Task:** Ligar o `DatabaseSeeder`
+- [x] **Task:** Ligar o `DatabaseSeeder`
   - **Acceptance criteria:**
     - Ambientes de produção executam apenas as tabelas de apoio e o `SettingSeeder`; nenhuma categoria é pré-cadastrada (o Mario as cria no admin)
-    - `php artisan migrate --seed` roda do zero sem erro em MySQL e em SQLite
+    - `php artisan migrate --seed` roda do zero sem erro em SQLite (desenvolvimento e testes); a execução em MySQL é verificada no deploy (Phase 12.2), pois a máquina de desenvolvimento não tem `pdo_mysql`
   - **Feature tests:**
     - `database_seeder_runs_without_demo_data_in_production` → com `APP_ENV=production` não existe nenhum carro
   - **Traces:** Workflow 8; US-7.1
@@ -1125,6 +1125,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 - [ ] **Task:** Deploy no Laravel Cloud
   - **Acceptance criteria:**
     - Ambiente `production` com MySQL gerenciado e bucket de storage (R2/S3) ligados
+    - `php artisan migrate --force --seed` roda do zero em MySQL sem erro (primeira verificação em MySQL do projeto)
     - Comandos de deploy: `php artisan migrate --force`, `php artisan optimize`, `php artisan filament:optimize`
     - Sem worker: o projeto não usa filas (conversões síncronas no upload)
     - Domínio próprio com HTTPS e `APP_URL` correto
