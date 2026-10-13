@@ -11,6 +11,7 @@ use App\Models\Setting;
 use App\Models\Transmission;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
@@ -258,7 +259,7 @@ class CarTest extends TestCase
         $car->save();
 
         $this->assertSame('2026-11-01 03:30:00', $car->fresh()->sold_at->format('Y-m-d H:i:s'));
-        $this->assertSame('2026-11-01 03:30:00', \Illuminate\Support\Facades\DB::table('cars')->where('id', $car->id)->value('sold_at'));
+        $this->assertSame('2026-11-01 03:30:00', DB::table('cars')->where('id', $car->id)->value('sold_at'));
     }
 
     public function test_assigning_a_null_sold_at_clears_it(): void

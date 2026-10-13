@@ -3,7 +3,9 @@
 namespace Tests\Feature\Site;
 
 use App\Models\Car;
+use App\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class ErrorPagesTest extends TestCase
@@ -38,8 +40,8 @@ class ErrorPagesTest extends TestCase
 
     public function test_500_page_still_renders_without_the_database(): void
     {
-        \Illuminate\Support\Facades\Schema::drop('settings');
-        \App\Models\Setting::flushCache();
+        Schema::drop('settings');
+        Setting::flushCache();
 
         $html = view('errors.500')->render();
 

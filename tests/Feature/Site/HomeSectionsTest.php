@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Site;
 
+use App\Livewire\CarDetail;
+use App\Livewire\Inventory;
 use App\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -88,6 +90,6 @@ class HomeSectionsTest extends TestCase
 
     public function test_home_includes_the_car_detail_modal_component(): void
     {
-        $this->get('/')->assertSeeLivewire(\App\Livewire\CarDetail::class)->assertSeeLivewire(\App\Livewire\Inventory::class);
+        $this->get('/')->assertSeeLivewire(CarDetail::class)->assertSeeLivewire(Inventory::class);
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Models\Category;
 use App\Models\Setting;
 use App\Models\User;
+use Carbon\Carbon;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
@@ -84,7 +85,7 @@ class CarListTest extends TestCase
 
     public function test_sold_cars_show_the_sale_date_and_price(): void
     {
-        Car::factory()->sold(\Carbon\Carbon::parse('2026-10-02 12:00', 'America/New_York'), 6495)->create(['price' => 6995]);
+        Car::factory()->sold(Carbon::parse('2026-10-02 12:00', 'America/New_York'), 6495)->create(['price' => 6995]);
 
         $this->get('/admin/cars')->assertSee('$6,995')->assertSee('Sold for $6,495 · Oct 2, 2026');
     }

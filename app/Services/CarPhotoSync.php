@@ -32,7 +32,7 @@ class CarPhotoSync
         $desired = $this->cleanPaths($paths);
         $existing = $car->photos()->get()->keyBy('file_path');
 
-        DB::transaction(function () use ($car, $desired, $existing): void {
+        DB::transaction(function () use ($desired, $existing): void {
             // Photos taken out of the form.
             $existing->reject(fn (CarPhoto $photo) => in_array($photo->file_path, $desired, true))
                 ->each(fn (CarPhoto $photo) => $photo->delete());

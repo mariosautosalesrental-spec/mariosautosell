@@ -12,6 +12,7 @@ use App\Models\Drivetrain;
 use App\Models\Setting;
 use App\Models\Transmission;
 use App\Models\User;
+use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -438,7 +439,7 @@ class CarFormTest extends TestCase
 
         $component = Livewire::test(CreateCar::class);
         $component->fillForm($this->valid(['category_id' => null]))
-            ->callAction(\Filament\Actions\Testing\TestAction::make('createOption')->schemaComponent('category_id'), ['name' => 'Toyota'])
+            ->callAction(TestAction::make('createOption')->schemaComponent('category_id'), ['name' => 'Toyota'])
             ->assertHasNoFormErrors();
 
         $this->assertDatabaseHas('categories', ['name' => 'Toyota']);

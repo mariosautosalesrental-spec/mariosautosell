@@ -88,8 +88,8 @@ class PhotoConverterTest extends TestCase
 
         app(PhotoConverter::class)->convert($photo);
 
-        $this->assertStringEndsWith("/thumb/side.webp", $photo->thumbUrl());
-        $this->assertStringEndsWith("/large/side.webp", $photo->largeUrl());
+        $this->assertStringEndsWith('/thumb/side.webp', $photo->thumbUrl());
+        $this->assertStringEndsWith('/large/side.webp', $photo->largeUrl());
     }
 
     public function test_conversion_failure_is_logged_and_not_thrown(): void

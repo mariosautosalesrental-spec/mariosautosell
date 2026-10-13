@@ -3,10 +3,12 @@
 namespace Tests\Feature\Admin;
 
 use App\Filament\Pages\StoreSettings;
+use App\Models\Car;
 use App\Models\Setting;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -133,14 +135,14 @@ class StoreSettingsTest extends TestCase
 
         Livewire::test(StoreSettings::class)->fillForm($this->valid)->call('save');
 
-        $this->assertFalse(\Illuminate\Support\Facades\Cache::has(Setting::CACHE_KEY));
+        $this->assertFalse(Cache::has(Setting::CACHE_KEY));
         $this->assertSame('(555) 123-4567', Setting::current()->phone);
     }
 
     public function test_store_info_change_in_admin_reflects_on_public_site(): void
     {
         Setting::factory()->create();
-        $car = \App\Models\Car::factory()->create();
+        $car = Car::factory()->create();
 
         $this->get('/')->assertSee('(978) 417-4036');
 

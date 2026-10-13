@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +38,7 @@ class CarPhoto extends Model
         return $this->belongsTo(Car::class);
     }
 
-    public static function disk(): \Illuminate\Contracts\Filesystem\Filesystem
+    public static function disk(): Filesystem
     {
         return Storage::disk(config('marios.photos_disk'));
     }

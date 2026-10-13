@@ -11,6 +11,7 @@ use App\Models\Car;
 use App\Models\Setting;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -226,7 +227,7 @@ class DashboardTest extends TestCase
     {
         $car = $this->sold('2026-10-10 12:00', 9000);
 
-        Livewire::test(ListCars::class)->callAction(TestAction::make(\Filament\Actions\DeleteAction::class)->table($car));
+        Livewire::test(ListCars::class)->callAction(TestAction::make(DeleteAction::class)->table($car));
 
         Livewire::test(SalesThisMonth::class)->assertDontSee('$9,000');
     }

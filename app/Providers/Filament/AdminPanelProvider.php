@@ -3,15 +3,15 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
+use Filament\FontProviders\GoogleFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Navigation\NavigationItem;
-use Filament\Support\Colors\Color;
 use Filament\Support\Icons\Heroicon;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -44,7 +44,7 @@ class AdminPanelProvider extends PanelProvider
                     ->sort(900),
             ])
             ->renderHook(PanelsRenderHook::BODY_END, fn (): string => view('filament.tab-bar')->render())
-            ->font('Barlow', provider: \Filament\FontProviders\GoogleFontProvider::class)
+            ->font('Barlow', provider: GoogleFontProvider::class)
             ->colors([
                 // The brand red (#B3121F) is shade 600, which buttons and links use.
                 'primary' => [

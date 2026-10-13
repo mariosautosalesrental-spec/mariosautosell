@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Url;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -329,7 +330,7 @@ class InventoryTest extends TestCase
         $reflection = new \ReflectionClass(Inventory::class);
 
         foreach (['make' => 'make', 'body' => 'body', 'max' => 'max', 'page' => 'page'] as $property => $alias) {
-            $attributes = $reflection->getProperty($property)->getAttributes(\Livewire\Attributes\Url::class);
+            $attributes = $reflection->getProperty($property)->getAttributes(Url::class);
             $this->assertCount(1, $attributes, "{$property} is not bound to the URL");
             $this->assertSame($alias, $attributes[0]->newInstance()->as);
         }
