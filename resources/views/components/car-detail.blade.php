@@ -45,7 +45,8 @@
     </div>
 
     <div class="d-body">
-        <h3 id="dTitle">{{ $car->title }}</h3>
+        {{-- The car's own page is the main heading of that page; inside the modal it is a section heading. --}}
+        <{{ $modal ? 'h3' : 'h1' }} id="dTitle">{{ $car->title }}</{{ $modal ? 'h3' : 'h1' }}>
         <span class="meta" id="dMeta">{{ collect([$car->trim, \App\Support\Format::miles($car->mileage)])->filter()->implode(' · ') }}</span>
         <span class="price" id="dPrice">{{ \App\Support\Format::price($car->price) }}</span>
         <span class="d-note">Includes dealer fees. Plus tax, title &amp; registration.</span>

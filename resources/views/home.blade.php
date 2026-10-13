@@ -1,4 +1,8 @@
 <x-layouts.app>
+    <x-slot:head>
+        <x-seo.json-ld :data="\App\Support\StructuredData::autoDealer(\App\Models\Setting::current())" />
+    </x-slot:head>
+
     <section class="hero" id="top" aria-label="Welcome">
         <div class="hero-inner">
             <div class="hero-copy">

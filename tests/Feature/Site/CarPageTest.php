@@ -32,6 +32,16 @@ class CarPageTest extends TestCase
             ->assertSee('Back to all cars');
     }
 
+    public function test_car_page_has_the_car_title_as_its_only_h1(): void
+    {
+        $car = $this->active();
+
+        $html = $this->get('/cars/'.$car->fresh()->slug)->getContent();
+
+        $this->assertSame(1, substr_count($html, '<h1'));
+        $this->assertStringContainsString('<h1 id="dTitle">2019 Jeep Compass</h1>', $html);
+    }
+
     public function test_car_page_returns_404_for_hidden_car(): void
     {
         $car = $this->active(['is_active' => false]);

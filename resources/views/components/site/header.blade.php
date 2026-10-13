@@ -1,4 +1,5 @@
-@php($store = \App\Models\Setting::current())
+{{-- Falls back to the default store info so the error pages still render when the database is down. --}}
+@php($store = rescue(fn () => \App\Models\Setting::current(), fn () => new \App\Models\Setting(\App\Models\Setting::defaults()), false))
 
 <header class="site">
     <div class="wrap">

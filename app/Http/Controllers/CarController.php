@@ -15,7 +15,7 @@ class CarController extends Controller
     public function show(string $slug): View
     {
         $car = Car::active()
-            ->with(['photos', 'bodyType', 'transmission', 'drivetrain'])
+            ->with(['photos', 'category', 'bodyType', 'transmission', 'drivetrain'])
             ->where('slug', $slug)
             ->firstOrFail();
 

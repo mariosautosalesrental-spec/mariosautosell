@@ -52,3 +52,13 @@ python3 scripts/extract-mockup-assets.py ".spec/init/design/Mario's Car Dealer.h
 ```
 
 The demo photos in `database/seeders/demo-photos/` are samples for local development only. Real photos are uploaded through the admin.
+
+## Accessibility checks
+
+The public pages are audited with [axe-core](https://github.com/dequelabs/axe-core) (WCAG 2.0/2.1 A and AA plus best practices): home, home with the car modal open, a car page, Privacy, Terms, Accessibility and the 404 page, at desktop (1280px) and phone (390px) widths. The last run (October 2026) found no violations and no horizontal scroll on phones.
+
+To repeat it: `npm i --no-save axe-core`, copy `node_modules/axe-core/axe.min.js` to `public/`, open a page in the browser, load that script and run `axe.run()`; delete the copy afterwards. Static design rules (light theme only, reduced motion, real buttons and links) are covered by `tests/Feature/Site/DesignRulesTest.php`.
+
+## Legal texts
+
+Privacy Policy, Terms of Use and Accessibility are drafts in English. The store should have a local attorney review them before the site goes live.

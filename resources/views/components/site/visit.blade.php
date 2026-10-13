@@ -13,7 +13,7 @@
     </div>
     <div class="map">
         <iframe src="{{ $store->mapsEmbedUrl() }}" title="Map showing {{ $store->fullAddress() }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-        <a class="map-btn" href="{{ $store->mapsUrl() }}" target="_blank" rel="noopener" aria-label="Open {{ $store->fullAddress() }} in Google Maps">
+        <a class="map-btn" href="{{ $store->mapsUrl() }}" target="_blank" rel="noopener" aria-label="Open in Google Maps: {{ $store->fullAddress() }}">
             <x-ui.icon name="pin" :size="18" :stroke="2.2" />
             Open in Google Maps
         </a>

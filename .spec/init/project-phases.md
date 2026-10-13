@@ -623,7 +623,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 7.1: Páginas legais e SEO
 
-- [ ] **Task:** Páginas `/privacy`, `/terms` e `/accessibility`
+- [x] **Task:** Páginas `/privacy`, `/terms` e `/accessibility`
   - **Acceptance criteria:**
     - As três rotas respondem 200, em inglês, linkadas no rodapé
     - Terms cita a garantia de usados de Massachusetts; Accessibility traz telefone e endereço de Store info
@@ -635,7 +635,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Car Dealer.html` → `#legal`, `#lTitle`
   - **Traces:** US-6.1; Workflow 7
 
-- [ ] **Task:** Componente de metadados (`<title>` e description)
+- [x] **Task:** Componente de metadados (`<title>` e description)
   - **Acceptance criteria:**
     - Home usa `Used Cars in Dracut, MA | Mario's Auto Sales & Rentals` com meta description
     - Cada página define o próprio título e description
@@ -643,7 +643,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `home_title_matches_spec` → título exato
   - **Traces:** US-6.2
 
-- [ ] **Task:** JSON-LD `AutoDealer` na home
+- [x] **Task:** JSON-LD `AutoDealer` na home
   - **Acceptance criteria:**
     - Contém nome, endereço, telefone e horários vindos de Store info
     - JSON válido dentro de `<script type="application/ld+json">`
@@ -651,7 +651,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `home_has_valid_autodealer_json_ld` → decodifica e contém endereço e telefone de Setting
   - **Traces:** US-6.2
 
-- [ ] **Task:** JSON-LD `Car` na página do carro
+- [x] **Task:** JSON-LD `Car` na página do carro
   - **Acceptance criteria:**
     - Contém nome, preço em USD, milhagem, câmbio, cor e imagem
     - Não aparece em carro que retorna 404
@@ -659,7 +659,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `car_page_has_valid_car_json_ld` → campos presentes e preço correto
   - **Traces:** US-6.2
 
-- [ ] **Task:** `/sitemap.xml` e `robots.txt`
+- [x] **Task:** `/sitemap.xml` e `robots.txt`
   - **Acceptance criteria:**
     - Sitemap lista a home, os carros ativos e as páginas legais, com URLs absolutas de `APP_URL`
     - Carro oculto, vendido ou excluído não aparece
@@ -670,28 +670,28 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `robots_txt_points_to_sitemap` → linha `Sitemap:`
   - **Traces:** US-6.3; US-8.1
 
-- [ ] **Task:** Textos `alt` das fotos
+- [x] **Task:** Textos `alt` das fotos
   - **Acceptance criteria:**
     - Fotos de carros usam `alt` descritivo (`{color} {title}`, ex.: `White 2018 Jeep Compass`); decorativas usam `alt=""`
   - **Traces:** US-6.2; US-6.4
 
 ### Phase 7.2: Acessibilidade e páginas de erro
 
-- [ ] **Task:** Auditoria de teclado e leitor de tela
+- [x] **Task:** Auditoria de teclado e leitor de tela
   - **Acceptance criteria:**
     - Home, modal e páginas legais navegáveis só com teclado, com ordem de foco lógica
     - Botões só de ícone com `aria-label`; áreas de toque de pelo menos 44px
     - Verificação com axe/Lighthouse sem violações críticas, registrada no README
   - **Traces:** US-6.4
 
-- [ ] **Task:** Verificação de contraste, movimento reduzido e tema claro
+- [x] **Task:** Verificação de contraste, movimento reduzido e tema claro
   - **Acceptance criteria:**
     - Texto com contraste de pelo menos 4.5:1 nas combinações usadas
     - Com `prefers-reduced-motion: reduce` não há hover com movimento nem transições
     - Nenhum estilo de modo escuro no projeto
   - **Traces:** US-6.4; US-6.5
 
-- [ ] **Task:** Páginas de erro 404 e 500 com a marca
+- [x] **Task:** Páginas de erro 404 e 500 com a marca
   - **Acceptance criteria:**
     - 404 e 500 usam o layout do site, em inglês, com link para a home
     - 404 de carro inexistente ou vendido usa essa página
