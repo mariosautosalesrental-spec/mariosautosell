@@ -1002,7 +1002,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 11.1: Consultas e widgets
 
-- [ ] **Task:** Serviço de relatório `SalesReport`
+- [x] **Task:** Serviço de relatório `SalesReport`
   - **Acceptance criteria:**
     - Vendas do mês-calendário atual em `America/New_York`: quantidade e soma de `sold_price`, pela data de `sold_at`
     - Mês anterior e variação; sem vendas no mês anterior a variação é `null`, sem divisão por zero
@@ -1017,7 +1017,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `inventory_counts_exclude_sold_cars` → contagens corretas
   - **Traces:** US-8.4; US-8.5; US-8.6; Key Concepts (Dashboard)
 
-- [ ] **Task:** Dashboard como página inicial do `/admin`
+- [x] **Task:** Dashboard como página inicial do `/admin`
   - **Acceptance criteria:**
     - `/admin` abre no dashboard, primeiro item do menu
     - Ordem: vendas do mês, estoque, gráfico, últimas vendas
@@ -1025,7 +1025,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `admin_home_is_dashboard` → `/admin` mostra os widgets
   - **Traces:** US-8.4; Workflow 9
 
-- [ ] **Task:** Widget `Sales this month`
+- [x] **Task:** Widget `Sales this month`
   - **Acceptance criteria:**
     - Mostra quantidade, valor total em USD e variação contra o mês anterior (`—` quando não há base)
     - Usa `SalesReport`
@@ -1034,7 +1034,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `sales_widget_shows_dash_without_previous_month` → `—`
   - **Traces:** US-8.4
 
-- [ ] **Task:** Widget de estoque
+- [x] **Task:** Widget de estoque
   - **Acceptance criteria:**
     - Mostra carros no site, ocultos e valor total do que está no site
     - Vendidos não contam
@@ -1043,7 +1043,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `inventory_widget_excludes_sold` → vendidos fora
   - **Traces:** US-8.5
 
-- [ ] **Task:** Gráfico de vendas dos últimos 6 meses
+- [x] **Task:** Gráfico de vendas dos últimos 6 meses
   - **Acceptance criteria:**
     - Uma barra por mês (quantidade vendida), incluindo o mês atual; meses sem venda com zero
     - Legível no celular
@@ -1051,7 +1051,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `chart_data_has_six_months_with_zeros` → seis rótulos e valores
   - **Traces:** US-8.6
 
-- [ ] **Task:** Tabela das últimas vendas
+- [x] **Task:** Tabela das últimas vendas
   - **Acceptance criteria:**
     - 5 últimos carros vendidos em ordem de `sold_at` decrescente: foto, nome, valor e data, com link para editar o carro
     - Sem vendas, mostra mensagem de estado vazio
@@ -1062,7 +1062,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 11.2: Integração e visual
 
-- [ ] **Task:** Atualização automática ao vender
+- [x] **Task:** Atualização automática ao vender
   - **Acceptance criteria:**
     - Marcar um carro como vendido atualiza os três blocos do dashboard na próxima carga, sem ação manual
     - Reabrir desfaz o efeito
@@ -1071,7 +1071,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `reopening_car_reverts_dashboard_numbers` → voltam
   - **Traces:** US-8.4; US-8.1; Workflow 9
 
-- [ ] **Task:** Layout responsivo do dashboard
+- [x] **Task:** Layout responsivo do dashboard
   - **Acceptance criteria:**
     - Blocos empilham no celular, sem rolagem horizontal
     - Valores em USD legíveis e fontes do tema do admin

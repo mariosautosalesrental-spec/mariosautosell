@@ -27,6 +27,7 @@
 .fi-header-heading,
 .fi-simple-header-heading,
 .fi-section-header-heading,
+.fi-ta-header-heading,
 .fi-modal-heading {
     font-family: var(--mario-display);
     text-transform: uppercase;
@@ -40,6 +41,7 @@
 }
 
 .fi-section-header-heading,
+.fi-ta-header-heading,
 .fi-modal-heading {
     font-weight: 700;
 }

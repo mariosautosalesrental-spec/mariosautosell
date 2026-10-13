@@ -7,6 +7,7 @@ use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,6 +36,18 @@ class Car extends Model
     public const STATUS_HIDDEN = 'hidden';
 
     public const STATUS_SOLD = 'sold';
+
+    /**
+     * The sale instant is always written in the app timezone (UTC). Eloquent
+     * would otherwise store a date object using its own timezone, which moves
+     * a sale by hours when it was built in the store's timezone.
+     */
+    protected function soldAt(): Attribute
+    {
+        return Attribute::set(fn ($value) => $value === null
+            ? null
+            : CarbonImmutable::parse($value)->setTimezone(config('app.timezone')));
+    }
 
     protected function casts(): array
     {

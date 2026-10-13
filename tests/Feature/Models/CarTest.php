@@ -251,6 +251,26 @@ class CarTest extends TestCase
         $this->assertSame('2026-10-02 16:00:00', $stored->format('Y-m-d H:i:s')); // UTC in the database
     }
 
+    public function test_assigning_sold_at_directly_also_stores_utc(): void
+    {
+        $car = Car::factory()->create();
+        $car->sold_at = CarbonImmutable::parse('2026-10-31 23:30', 'America/New_York');
+        $car->save();
+
+        $this->assertSame('2026-11-01 03:30:00', $car->fresh()->sold_at->format('Y-m-d H:i:s'));
+        $this->assertSame('2026-11-01 03:30:00', \Illuminate\Support\Facades\DB::table('cars')->where('id', $car->id)->value('sold_at'));
+    }
+
+    public function test_assigning_a_null_sold_at_clears_it(): void
+    {
+        $car = Car::factory()->sold()->create();
+
+        $car->sold_at = null;
+        $car->save();
+
+        $this->assertNull($car->fresh()->sold_at);
+    }
+
     public function test_mark_as_sold_rejects_future_date(): void
     {
         $car = Car::factory()->create();
