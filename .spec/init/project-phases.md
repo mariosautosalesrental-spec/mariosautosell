@@ -805,7 +805,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 9.1: Formulário
 
-- [ ] **Task:** `CarResource` com páginas de criar e editar
+- [x] **Task:** `CarResource` com páginas de criar e editar
   - **Acceptance criteria:**
     - Menu `Cars` com listagem, criar e editar
     - Campos: Photos, Category, Name, Version, Price, Mileage, Body type, Transmission, Drivetrain, Color, Engine, Description, `Show on website` (ligado por padrão) e `Price drop` badge
@@ -813,7 +813,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
   - **Design ref:** `.spec/init/design/Mario's Admin.html` → `#fTitle`, `#fTrim`, `#fPrice`, `#fMiles`, `#fColor`, `#fDesc`, `#fActive`, `#fDrop`
   - **Traces:** US-3.3; US-3.5; Workflow 4
 
-- [ ] **Task:** Validação do formulário
+- [x] **Task:** Validação do formulário
   - **Acceptance criteria:**
     - Category, Name, Body type, Transmission e Drivetrain obrigatórios
     - Price e Mileage inteiros sem centavos (Price de 1 em diante, Mileage de 0 em diante)
@@ -827,7 +827,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `sold_car_cannot_be_turned_on` → bloqueado
   - **Traces:** US-3.3; US-3.6
 
-- [ ] **Task:** Slug e valores padrão ao criar
+- [x] **Task:** Slug e valores padrão ao criar
   - **Acceptance criteria:**
     - Ao salvar, o carro recebe slug único e `is_active = true` (se válido)
     - O carro aparece no site assim que salvo ativo
@@ -836,7 +836,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `created_active_car_appears_on_site` → home lista o carro
   - **Traces:** US-3.3; US-3.6
 
-- [ ] **Task:** Edição de carro
+- [x] **Task:** Edição de carro
   - **Acceptance criteria:**
     - Todos os campos podem ser alterados, inclusive fotos
     - Alterações aparecem no site logo após salvar
@@ -847,7 +847,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
 
 ### Phase 9.2: Fotos e prévia
 
-- [ ] **Task:** Upload de várias fotos
+- [x] **Task:** Upload de várias fotos
   - **Acceptance criteria:**
     - Aceita várias fotos por vez (jpg, png, webp), pelo celular ou computador, com limite de 10 MB por arquivo
     - Arquivos que não são imagem são rejeitados com mensagem clara
@@ -859,7 +859,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `photo_path_is_saved_in_car_photos` → `file_path` correto
   - **Traces:** US-3.4
 
-- [ ] **Task:** Reordenar fotos e definir a capa
+- [x] **Task:** Reordenar fotos e definir a capa
   - **Acceptance criteria:**
     - Fotos reordenáveis por arrastar; a primeira é a capa
     - A ordem é gravada em `sort_order` e usada no card, no modal e na prévia
@@ -868,7 +868,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `first_photo_is_cover_in_public_card` → capa correta
   - **Traces:** US-3.4
 
-- [ ] **Task:** Remover fotos
+- [x] **Task:** Remover fotos
   - **Acceptance criteria:**
     - Remover uma foto apaga a linha e os arquivos (original e conversões)
     - Se o carro ativo ficar sem foto, a validação de publicação bloqueia o salvamento
@@ -877,7 +877,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `removing_last_photo_of_active_car_is_blocked` → erro
   - **Traces:** US-3.4; US-3.6
 
-- [ ] **Task:** Conversões `thumb` e `large` síncronas no upload (`PhotoConverter`)
+- [x] **Task:** Conversões `thumb` e `large` síncronas no upload (`PhotoConverter`)
   - **Acceptance criteria:**
     - Um serviço `PhotoConverter` (Intervention Image) gera WebP `thumb` (600px de largura) e `large` (1600px) a partir do original, em caminhos por convenção, durante o upload
     - Roda de forma síncrona ao criar a foto: sem job, fila ou worker
@@ -889,14 +889,14 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - `conversion_failure_is_logged_and_not_thrown` → log registrado
   - **Traces:** US-7.2; US-3.4
 
-- [ ] **Task:** Prévia do card ao lado do formulário
+- [x] **Task:** Prévia do card ao lado do formulário
   - **Acceptance criteria:**
     - Mostra capa, nome, versão, preço e selo `Price drop` atualizados enquanto o formulário é preenchido
     - Visual igual ao `car-card` do site
   - **Design ref:** `.spec/init/design/Mario's Admin.html` → `.card.preview`, `#pvTitle`, `#pvSub`, `#pvPrice`
   - **Traces:** US-3.3
 
-- [ ] **Task:** Formulário usável no celular
+- [x] **Task:** Formulário usável no celular
   - **Acceptance criteria:**
     - Uma coluna no celular, campos grandes e upload com opção de câmera
     - Salvar e voltar para a lista funcionam com um toque
@@ -1129,6 +1129,7 @@ A construção do app Laravel (pasta `/home/eliel/workspace/projetos/marios-auto
     - Comandos de deploy: `php artisan migrate --force`, `php artisan optimize`, `php artisan filament:optimize`
     - Sem worker: o projeto não usa filas (conversões síncronas no upload)
     - Domínio próprio com HTTPS e `APP_URL` correto
+    - O bucket de fotos é público e tem regra de CORS liberando `GET` para o domínio do site (o admin carrega as fotos salvas pelo navegador)
   - **Traces:** US-7.1; US-7.2; Workflow 8
 
 - [ ] **Task:** Usuários reais do admin e substituição de dados de exemplo

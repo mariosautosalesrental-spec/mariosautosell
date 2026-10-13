@@ -59,6 +59,12 @@ class Car extends Model
             $car->forceFill(['slug' => $car->buildSlug()])->saveQuietly();
         });
 
+        // The photo rows go with the car through the foreign key; deleting them
+        // one by one first lets each photo remove its files from the disk.
+        static::deleting(function (Car $car): void {
+            $car->photos()->get()->each->delete();
+        });
+
         static::updating(function (Car $car): void {
             if ($car->isDirty(['title', 'trim'])) {
                 $car->slug = $car->buildSlug();

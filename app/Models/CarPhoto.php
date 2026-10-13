@@ -14,6 +14,23 @@ class CarPhoto extends Model
 {
     use HasFactory;
 
+    protected static function booted(): void
+    {
+        // Deleting a photo removes the original and its conversions from the disk.
+        static::deleted(function (CarPhoto $photo): void {
+            $disk = static::disk();
+
+            $disk->delete([
+                $photo->file_path,
+                $photo->conversionPath('thumb'),
+                $photo->conversionPath('large'),
+            ]);
+
+            Cache::forget('photo-conversion:'.md5($photo->conversionPath('thumb')));
+            Cache::forget('photo-conversion:'.md5($photo->conversionPath('large')));
+        });
+    }
+
     /** @return BelongsTo<Car, $this> */
     public function car(): BelongsTo
     {

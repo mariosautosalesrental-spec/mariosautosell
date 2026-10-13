@@ -62,3 +62,7 @@ To repeat it: `npm i --no-save axe-core`, copy `node_modules/axe-core/axe.min.js
 ## Legal texts
 
 Privacy Policy, Terms of Use and Accessibility are drafts in English. The store should have a local attorney review them before the site goes live.
+
+## Photos on S3 / Cloudflare R2
+
+In production the photos live on the `s3` disk (`PHOTOS_DISK=s3`) and must be publicly readable. The admin photo field loads the existing photos from the bucket URL in the browser, so the bucket needs a **CORS rule** that allows `GET` from the admin's origin (the site's domain). Locally, open the site on the same host as `APP_URL` (for example `http://localhost:8000`), otherwise the browser blocks the preview of saved photos in the admin.

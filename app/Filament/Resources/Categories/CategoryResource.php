@@ -4,8 +4,8 @@ namespace App\Filament\Resources\Categories;
 
 use App\Filament\Resources\Categories\Pages\ManageCategories;
 use App\Models\Category;
+use App\Rules\UniqueCategoryName;
 use BackedEnum;
-use Closure;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -45,17 +45,7 @@ class CategoryResource extends Resource
                     ->placeholder('e.g. Toyota')
                     ->required()
                     ->maxLength(255)
-                    ->rule(fn (?Category $record): Closure => function (string $attribute, mixed $value, Closure $fail) use ($record): void {
-                        // The mockup treats "jeep" and "Jeep" as the same make.
-                        $exists = Category::query()
-                            ->whereRaw('lower(name) = ?', [mb_strtolower(trim((string) $value))])
-                            ->when($record, fn ($query) => $query->whereKeyNot($record->getKey()))
-                            ->exists();
-
-                        if ($exists) {
-                            $fail('"'.trim((string) $value).'" already exists.');
-                        }
-                    }),
+                    ->rule(fn (?Category $record) => new UniqueCategoryName($record?->getKey())),
             ]);
     }
 
