@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=Yellowtail&display=swap');
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+/*
+ * Design tokens from the approved mockups (single light theme).
+ * Fonts are loaded from Google Fonts at the top of this file.
+ */
+@theme {
+    --color-accent: #B3121F;
+    --color-whatsapp: #1A7F45;
+    --color-ink: #18161A;
+    --color-muted: #5E5A55;
+    --color-bg: #F7F6F4;
+    --color-surface: #FFFFFF;
+    --color-line: #E6E2DD;
+    --color-chip: #EFEDEA;
+    --color-dark: #141216;
+
+    --font-display: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+    --font-body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+    --font-script: 'Yellowtail', 'Brush Script MT', cursive;
+    --font-sans: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer base {
+    html {
+        color-scheme: light;
+    }
+
+    body {
+        background: var(--color-bg);
+        color: var(--color-ink);
+        font-family: var(--font-body);
+    }
+}
