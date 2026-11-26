@@ -26,6 +26,8 @@ use Illuminate\Validation\ValidationException;
     'category_id', 'body_type_id', 'transmission_id', 'drivetrain_id',
     'title', 'trim', 'price', 'mileage', 'color', 'engine', 'description',
     'is_active', 'price_drop',
+    'vin', 'year', 'doors', 'seats', 'cylinders', 'displacement_l', 'horsepower',
+    'fuel_type', 'airbags', 'tpms', 'vin_data',
 ])]
 class Car extends Model
 {
@@ -57,6 +59,12 @@ class Car extends Model
             'sold_price' => 'integer',
             'is_active' => 'boolean',
             'price_drop' => 'boolean',
+            'year' => 'integer',
+            'doors' => 'integer',
+            'seats' => 'integer',
+            'cylinders' => 'integer',
+            'horsepower' => 'integer',
+            'vin_data' => 'array',
             'sold_at' => 'datetime',
         ];
     }
@@ -249,6 +257,20 @@ class Car extends Model
         });
 
         return $this;
+    }
+
+    // ------------------------------------------------------------------- specs
+
+    /** "2.0L 4-cyl · 247 hp" from the structured fields, or the free-text engine. */
+    public function engineSummary(): ?string
+    {
+        $parts = array_filter([
+            $this->displacement_l !== null ? number_format((float) $this->displacement_l, 1).'L' : null,
+            $this->cylinders ? "{$this->cylinders}-cyl" : null,
+            $this->horsepower ? "{$this->horsepower} hp" : null,
+        ]);
+
+        return $parts === [] ? ($this->engine ?: null) : implode(' · ', $parts);
     }
 
     // ----------------------------------------------------------------- warranty

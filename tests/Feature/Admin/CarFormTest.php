@@ -16,6 +16,8 @@ use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\Concerns\MakesImages;
@@ -464,5 +466,47 @@ class CarFormTest extends TestCase
         $cover = Storage::disk('public')->url($car->photos->first()->file_path);
 
         Livewire::test(EditCar::class, ['record' => $car->getKey()])->assertSeeHtml($cover);
+    }
+
+    public function test_look_up_fills_the_form_from_the_vin(): void
+    {
+        Cache::flush();
+        Http::fake(['vpic.nhtsa.dot.gov/*' => Http::response(['Results' => [[
+            'Make' => 'LAND ROVER', 'Model' => 'Range Rover Velar', 'ModelYear' => '2018', 'Trim' => 'R-Dynamic SE',
+            'BodyClass' => 'Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]', 'Doors' => '5', 'EngineCylinders' => '4',
+            'FuelTypePrimary' => 'Gasoline', 'AirBagLocFront' => '1st Row', 'TPMS' => 'Direct', 'ErrorCode' => '0',
+        ]]])]);
+
+        Livewire::test(CreateCar::class)
+            ->fillForm(['vin' => 'salyl2rx3ja777038'])
+            ->callAction(TestAction::make('lookupVin')->schemaComponent('vin'))
+            ->assertFormSet([
+                'title' => '2018 Land Rover Range Rover Velar',
+                'trim' => 'R-Dynamic SE',
+                'year' => 2018,
+                'doors' => 5,
+                'cylinders' => 4,
+                'fuel_type' => 'Gasoline',
+                'airbags' => 'Front',
+                'tpms' => 'Direct',
+                'body_type_id' => $this->body->id,
+            ]);
+
+        $this->assertSame('Land Rover', Category::query()->latest('id')->value('name'));
+    }
+
+    public function test_a_duplicated_or_malformed_vin_is_rejected(): void
+    {
+        Car::factory()->create(['vin' => 'SALYL2RX3JA777038']);
+
+        Livewire::test(CreateCar::class)
+            ->fillForm(['vin' => 'SALYL2RX3JA777038'])
+            ->call('create')
+            ->assertHasFormErrors(['vin']);
+
+        Livewire::test(CreateCar::class)
+            ->fillForm(['vin' => 'NOT-A-VIN'])
+            ->call('create')
+            ->assertHasFormErrors(['vin']);
     }
 }

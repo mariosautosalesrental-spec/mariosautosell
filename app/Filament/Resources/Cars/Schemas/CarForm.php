@@ -4,18 +4,24 @@ namespace App\Filament\Resources\Cars\Schemas;
 
 use App\Models\Car;
 use App\Models\CarPhoto;
+use App\Models\Category;
 use App\Rules\CanBeActive;
 use App\Rules\UniqueCategoryName;
 use App\Services\CarPhotoSync;
+use App\Services\VinDecoder;
+use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Components\View;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -84,6 +90,8 @@ class CarForm
         return Section::make('Details')
             ->columns(['default' => 1, 'sm' => 2])
             ->schema([
+                self::vinField(),
+                Hidden::make('vin_data'),
                 Select::make('category_id')
                     ->label('Category')
                     ->relationship('category', 'name', fn (Builder $query) => $query->ordered())
@@ -147,7 +155,17 @@ class CarForm
                 TextInput::make('engine')
                     ->label('Engine (optional)')
                     ->placeholder('2.4L 4-cyl')
+                    ->helperText('Only used when the fields below are empty.')
                     ->maxLength(255),
+                TextInput::make('year')->label('Year')->numeric()->integer()->minValue(1950)->maxValue((int) date('Y') + 2),
+                TextInput::make('doors')->label('Doors')->numeric()->integer()->minValue(1)->maxValue(8),
+                TextInput::make('seats')->label('Seats')->numeric()->integer()->minValue(1)->maxValue(15),
+                TextInput::make('cylinders')->label('Cylinders')->numeric()->integer()->minValue(1)->maxValue(16),
+                TextInput::make('displacement_l')->label('Engine size')->numeric()->minValue(0.1)->maxValue(9.9)->step(0.1)->suffix('L'),
+                TextInput::make('horsepower')->label('Horsepower')->numeric()->integer()->minValue(1)->maxValue(2000)->suffix('hp'),
+                TextInput::make('fuel_type')->label('Fuel')->placeholder('Gasoline')->maxLength(255),
+                TextInput::make('airbags')->label('Airbags')->placeholder('Front, Side')->maxLength(255),
+                TextInput::make('tpms')->label('Tire pressure monitor')->placeholder('Direct')->maxLength(255),
                 Textarea::make('description')
                     ->label('Description')
                     ->helperText('A few lines.')
@@ -155,6 +173,79 @@ class CarForm
                     ->maxLength(2000)
                     ->columnSpanFull(),
             ]);
+    }
+
+    /**
+     * The VIN box: "Look up" fills the form with what the VIN says about the car.
+     * Everything stays editable and the form works the same without it.
+     */
+    private static function vinField(): TextInput
+    {
+        return TextInput::make('vin')
+            ->label('VIN')
+            ->placeholder('17 characters')
+            ->helperText('Type the VIN and press Look up to fill in the car details.')
+            ->maxLength(17)
+            ->dehydrateStateUsing(fn (?string $state): ?string => filled($state) ? VinDecoder::normalize($state) : null)
+            ->rules([
+                fn (): \Closure => function (string $attribute, mixed $value, \Closure $fail): void {
+                    if (filled($value) && ! VinDecoder::isValid((string) $value)) {
+                        $fail('A VIN has 17 letters and numbers (no I, O or Q).');
+                    }
+                },
+            ])
+            ->unique(table: 'cars', column: 'vin', ignoreRecord: true)
+            ->columnSpanFull()
+            ->suffixAction(
+                Action::make('lookupVin')
+                    ->label('Look up')
+                    ->icon('heroicon-m-magnifying-glass')
+                    ->action(function (Get $get, Set $set, ?Car $record): void {
+                        $vin = (string) $get('vin');
+
+                        if (! VinDecoder::isValid($vin)) {
+                            Notification::make()->warning()->title('Enter a valid 17-character VIN first.')->send();
+
+                            return;
+                        }
+
+                        if (Car::query()->where('vin', VinDecoder::normalize($vin))->when($record, fn ($q) => $q->whereKeyNot($record->getKey()))->exists()) {
+                            Notification::make()->warning()->title('A car with this VIN is already in the lot.')->send();
+
+                            return;
+                        }
+
+                        $data = app(VinDecoder::class)->decode($vin);
+
+                        if ($data === null) {
+                            Notification::make()->warning()
+                                ->title('Could not read this VIN')
+                                ->body('Check the number or fill in the details by hand.')
+                                ->send();
+
+                            return;
+                        }
+
+                        $category = Category::query()->whereRaw('lower(name) = ?', [mb_strtolower($data['make'])])->first()
+                            ?? Category::query()->create(['name' => $data['make']]);
+
+                        $set('vin', $data['vin']);
+                        $set('vin_data', $data['vin_data']);
+                        $set('category_id', $category->getKey());
+
+                        foreach (['title', 'trim', 'year', 'doors', 'seats', 'cylinders', 'displacement_l', 'horsepower', 'fuel_type', 'airbags', 'tpms', 'body_type_id', 'transmission_id', 'drivetrain_id'] as $field) {
+                            // Never wipe what is already there with a blank answer.
+                            if ($data[$field] !== null) {
+                                $set($field, $data[$field]);
+                            }
+                        }
+
+                        Notification::make()->success()
+                            ->title($data['title'])
+                            ->body($data['complete'] ? 'Filled in from the VIN. You can edit anything.' : 'Partly filled in: please check the details.')
+                            ->send();
+                    }),
+            );
     }
 
     private static function visibilitySection(): Section

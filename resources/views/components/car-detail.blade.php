@@ -8,12 +8,22 @@
         'alt' => $alt,
     ])->values();
     $warranty = $car->maWarranty();
+    // Only facts about this car. The list card stays short; this is the full sheet.
+    $engine = collect([$car->engineSummary(), $car->fuel_type])->filter()->implode(' · ');
     $specs = array_filter([
-        'Engine' => $car->engine,
+        'Engine' => $engine,
         'Transmission' => $car->transmission->name,
         'Drivetrain' => $car->drivetrain->name,
-        'Body' => $car->bodyType->name,
+        'Body' => collect([
+            $car->bodyType->name,
+            $car->doors ? $car->doors.' doors' : null,
+            $car->seats ? $car->seats.' seats' : null,
+        ])->filter()->implode(' · '),
         'Color' => $car->color,
+        'Year' => $car->year,
+        'Airbags' => $car->airbags,
+        'Tire pressure monitor' => $car->tpms,
+        'VIN' => $car->vin,
     ], fn ($value) => filled($value));
 @endphp
 

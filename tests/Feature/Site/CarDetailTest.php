@@ -172,4 +172,23 @@ class CarDetailTest extends TestCase
             ->assertSeeHtml(e($car->whatsappUrl()))
             ->assertSeeHtml('https://wa.me/19784174036?text=');
     }
+
+    public function test_the_vin_details_show_only_in_the_open_car(): void
+    {
+        $car = $this->car([
+            'vin' => 'SALYL2RX3JA777038', 'year' => 2018, 'doors' => 5, 'seats' => 5, 'cylinders' => 4,
+            'displacement_l' => 2.0, 'horsepower' => 247, 'fuel_type' => 'Gasoline', 'airbags' => 'Front, Side', 'tpms' => 'Direct',
+            'vin_data' => ['BasePrice' => '58700'],
+        ]);
+
+        Livewire::test(CarDetail::class)
+            ->call('open', $car->id)
+            ->assertSee('2.0L · 4-cyl · 247 hp · Gasoline')
+            ->assertSee('5 doors')
+            ->assertSee('Front, Side')
+            ->assertSee('Direct')
+            ->assertSee('SALYL2RX3JA777038')
+            ->assertDontSee('58700')
+            ->assertDontSee('Recall');
+    }
 }

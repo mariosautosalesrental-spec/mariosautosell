@@ -44,7 +44,7 @@ class SchemaTest extends TestCase
             'categories' => ['id', 'name', 'sort_order', 'created_at', 'updated_at'],
             'users' => ['id', 'name', 'email', 'password', 'remember_token', 'created_at', 'updated_at'],
             'settings' => ['id', 'whatsapp', 'phone', 'street', 'city', 'state', 'zip', 'hours_mon_fri', 'hours_sat', 'hours_sun', 'created_at', 'updated_at'],
-            'cars' => ['id', 'category_id', 'body_type_id', 'transmission_id', 'drivetrain_id', 'title', 'trim', 'slug', 'price', 'mileage', 'color', 'engine', 'description', 'is_active', 'price_drop', 'sold_at', 'sold_price', 'created_at', 'updated_at'],
+            'cars' => ['id', 'category_id', 'body_type_id', 'transmission_id', 'drivetrain_id', 'title', 'trim', 'slug', 'price', 'mileage', 'color', 'engine', 'description', 'is_active', 'price_drop', 'sold_at', 'sold_price', 'vin', 'year', 'doors', 'seats', 'cylinders', 'displacement_l', 'horsepower', 'fuel_type', 'airbags', 'tpms', 'vin_data', 'created_at', 'updated_at'],
             'car_photos' => ['id', 'car_id', 'file_path', 'sort_order', 'created_at', 'updated_at'],
         ];
 
