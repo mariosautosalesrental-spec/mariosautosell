@@ -32,7 +32,8 @@ class SecurityTest extends TestCase
 
         collect(Route::getRoutes()->getRoutes())
             ->filter(fn (LaravelRoute $route) => in_array('GET', $route->methods(), true) && str_starts_with($route->uri(), 'admin'))
-            ->reject(fn (LaravelRoute $route) => in_array($route->uri(), ['admin/login'], true))
+            // The login and the password pages are public on purpose: an invited person opens the reset link signed out.
+            ->reject(fn (LaravelRoute $route) => in_array($route->uri(), ['admin/login', 'admin/password-reset/request', 'admin/password-reset/reset'], true))
             ->each(function (LaravelRoute $route) use (&$checked): void {
                 $uri = preg_replace('/\{[^}]+\}/', '1', '/'.$route->uri());
 

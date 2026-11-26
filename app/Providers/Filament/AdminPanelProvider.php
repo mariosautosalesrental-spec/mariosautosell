@@ -31,6 +31,9 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(Login::class)
+            ->profile()
+            // The reset page is how an invited person chooses a password (the link comes from the Users page).
+            ->passwordReset()
             ->brandName("Mario's Auto Sales & Rentals")
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3.25rem')
